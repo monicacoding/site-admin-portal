@@ -3,93 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sponsors Support Portal</title>
+<title>Site Admin Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F7F6F3;
-  --surface:#FFFFFF;
-  --surface2:#F0EFEb;
-  --border:#E2E0DA;
-  --border-strong:#C8C5BC;
-  --text:#18181A;
-  --text-2:#6B6863;
-  --text-3:#A8A5A0;
-  --accent:#0F52BA;
-  --accent-2:#D6E4FF;
-  --accent-text:#0A3A8A;
-  --green:#15803D;
-  --green-bg:#DCFCE7;
-  --amber:#92400E;
-  --amber-bg:#FEF3C7;
-  --red:#991B1B;
-  --red-bg:#FEE2E2;
-  --blue-bg:#EFF6FF;
-  --blue-text:#1D4ED8;
-  --r:10px;
-  --r-sm:6px;
-  --mono:'JetBrains Mono',monospace;
-  --sans:'Sora',sans-serif;
+  --bg:#F7F6F3;--surface:#FFFFFF;--surface2:#F0EFEB;--border:#E2E0DA;
+  --border-strong:#C8C5BC;--text:#18181A;--text-2:#6B6863;--text-3:#A8A5A0;
+  --accent:#0F52BA;--accent-2:#D6E4FF;--accent-text:#0A3A8A;
+  --green:#15803D;--green-bg:#DCFCE7;--amber:#92400E;--amber-bg:#FEF3C7;
+  --red:#991B1B;--red-bg:#FEE2E2;--blue-bg:#EFF6FF;--blue-text:#1D4ED8;
+  --orange:#C2410C;--orange-bg:#FFF7ED;
+  --r:10px;--r-sm:6px;--mono:'JetBrains Mono',monospace;--sans:'Sora',sans-serif;
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
 
 /* HEADER */
-header{
-  background:var(--surface);border-bottom:1px solid var(--border);
-  height:58px;display:flex;align-items:center;padding:0 28px;gap:14px;
-  position:sticky;top:0;z-index:100;
-}
+header{background:var(--surface);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 28px;gap:14px;position:sticky;top:0;z-index:100;}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;color:var(--text)}
-.brand-dot{
-  width:30px;height:30px;border-radius:8px;background:var(--accent);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:12px;font-weight:700;letter-spacing:-0.5px;
-  font-family:var(--mono);
-}
+.brand-dot{width:30px;height:30px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;letter-spacing:-0.5px;font-family:var(--mono);}
 .brand-sep{width:1px;height:20px;background:var(--border);margin:0 4px}
 .brand-sub{font-size:12.5px;color:var(--text-2);font-weight:400}
-.header-user{
-  margin-left:auto;display:flex;align-items:center;gap:8px;
-  font-size:13px;color:var(--text-2);
-  padding:5px 12px 5px 5px;
-  border:1px solid var(--border);border-radius:999px;
-  cursor:default;
-}
-.avatar{
-  width:26px;height:26px;border-radius:50%;background:var(--accent);
-  color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;
-}
+.header-user{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);padding:5px 12px 5px 5px;border:1px solid var(--border);border-radius:999px;cursor:default;}
+.avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;}
 
 /* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 58px)}
-nav.sidebar{
-  width:220px;background:var(--surface);border-right:1px solid var(--border);
-  padding:18px 10px;display:flex;flex-direction:column;gap:2px;
-  position:sticky;top:58px;height:calc(100vh - 58px);
-}
-.nav-item{
-  display:flex;align-items:center;gap:10px;padding:9px 12px;
-  border-radius:var(--r-sm);font-size:13.5px;color:var(--text-2);
-  cursor:pointer;transition:all 0.14s;border:none;background:none;
-  font-family:var(--sans);width:100%;text-align:left;
-}
+nav.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);padding:18px 10px;display:flex;flex-direction:column;gap:2px;position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--text-2);cursor:pointer;transition:all 0.14s;border:none;background:none;font-family:var(--sans);width:100%;text-align:left;}
 .nav-item svg{width:16px;height:16px;flex-shrink:0;stroke-width:1.8}
 .nav-item:hover{background:var(--bg);color:var(--text)}
 .nav-item.active{background:var(--accent-2);color:var(--accent-text);font-weight:500}
 .nav-item.active svg{stroke:var(--accent)}
 .nav-sep{height:1px;background:var(--border);margin:8px 4px}
 .nav-section-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);padding:4px 12px 2px}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:999px;font-family:var(--mono);}
 
-main{flex:1;padding:32px 36px;overflow-y:auto;max-width:900px}
+main{flex:1;padding:32px 36px;overflow-y:auto;max-width:920px}
 
 /* PAGE */
 .page{display:none}
 .page.active{display:block;animation:fadein .18s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-
 .page-head{margin-bottom:24px}
 .page-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:3px}
 .page-sub{font-size:13.5px;color:var(--text-2)}
@@ -98,35 +55,26 @@ main{flex:1;padding:32px 36px;overflow-y:auto;max-width:900px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
 .card+.card{margin-top:16px}
 .card-title{font-size:14.5px;font-weight:600;margin-bottom:14px}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 
 /* WELCOME BANNER */
-.welcome-banner{
-  background:var(--accent);color:#fff;border-radius:var(--r);padding:22px 26px;
-  margin-bottom:20px;display:flex;align-items:center;gap:18px;
-}
+.welcome-banner{background:var(--accent);color:#fff;border-radius:var(--r);padding:22px 26px;margin-bottom:20px;display:flex;align-items:center;gap:18px;}
 .welcome-banner-text h2{font-size:17px;font-weight:600;margin-bottom:3px}
 .welcome-banner-text p{font-size:13px;opacity:.82;line-height:1.5}
 .welcome-banner-icon{font-size:36px;opacity:.7}
 
 /* QUICK ACTIONS */
-.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.quick-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
-  padding:18px 16px;cursor:pointer;transition:all .14s;display:flex;flex-direction:column;gap:10px;
-  text-align:left;
-}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.quick-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px;cursor:pointer;transition:all .14s;display:flex;flex-direction:column;gap:10px;text-align:left;}
 .quick-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(15,82,186,.08);transform:translateY(-1px)}
 .quick-card-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center}
 .quick-card-icon svg{width:20px;height:20px;stroke-width:1.8}
-.quick-card-title{font-size:13.5px;font-weight:600;color:var(--text)}
-.quick-card-desc{font-size:12px;color:var(--text-2);line-height:1.45}
+.quick-card-title{font-size:13px;font-weight:600;color:var(--text)}
+.quick-card-desc{font-size:11.5px;color:var(--text-2);line-height:1.45}
 
-/* MY TICKETS TABLE */
+/* TICKETS LIST */
 .tickets-list{display:flex;flex-direction:column;gap:0}
-.ticket-row{
-  display:flex;align-items:center;gap:14px;padding:14px 16px;
-  border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;
-}
+.ticket-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
 .ticket-row:last-child{border-bottom:none}
 .ticket-row:hover{background:var(--bg)}
 .ticket-row:first-child{border-top:1px solid var(--border);margin-top:-1px}
@@ -137,23 +85,41 @@ main{flex:1;padding:32px 36px;overflow-y:auto;max-width:900px}
 .ticket-chevron{color:var(--text-3)}
 .ticket-chevron svg{width:14px;height:14px;stroke-width:2}
 
-/* BADGE */
-.badge{
-  display:inline-flex;align-items:center;gap:4px;
-  padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:500;
+/* ONGOING ISSUES */
+.issue-alert{
+  display:flex;align-items:flex-start;gap:14px;padding:16px 18px;
+  border-bottom:1px solid var(--border);transition:background .12s;
 }
+.issue-alert:last-child{border-bottom:none}
+.issue-alert-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;animation:pulse 2s infinite;}
+.issue-alert-dot.critical{background:var(--red)}
+.issue-alert-dot.warning{background:var(--orange)}
+.issue-alert-dot.info{background:var(--accent)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.issue-alert-body{flex:1}
+.issue-alert-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:2px}
+.issue-alert-meta{font-size:12px;color:var(--text-2);line-height:1.4}
+.issue-alert-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.issue-banner{
+  background:var(--orange-bg);border:1px solid #FDBA74;border-radius:var(--r);
+  padding:13px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;
+}
+.issue-banner svg{width:16px;height:16px;flex-shrink:0;stroke:var(--orange);stroke-width:2}
+.issue-banner-text{font-size:13px;color:var(--orange);line-height:1.4}
+.issue-banner-text strong{font-weight:600}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:500;}
 .b-green{background:var(--green-bg);color:var(--green)}
 .b-amber{background:var(--amber-bg);color:var(--amber)}
 .b-blue{background:var(--blue-bg);color:var(--blue-text)}
 .b-red{background:var(--red-bg);color:var(--red)}
 .b-gray{background:var(--surface2);color:var(--text-2)}
+.b-orange{background:var(--orange-bg);color:var(--orange)}
 
 /* KNOWLEDGE BASE */
 .kb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.kb-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
-  padding:18px;cursor:pointer;transition:all .14s;
-}
+.kb-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .14s;}
 .kb-card:hover{border-color:var(--accent);background:var(--blue-bg)}
 .kb-card-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .kb-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center}
@@ -162,36 +128,22 @@ main{flex:1;padding:32px 36px;overflow-y:auto;max-width:900px}
 .kb-desc{font-size:12.5px;color:var(--text-2);line-height:1.45}
 .kb-count{font-size:11px;color:var(--text-3);margin-top:6px}
 
-/* ARTICLE VIEW */
+/* ARTICLE STEPS */
 .article-steps{display:flex;flex-direction:column;gap:0;margin-top:4px}
 .a-step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
 .a-step:last-child{border-bottom:none}
-.a-num{
-  width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-strong);
-  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;
-  color:var(--text-2);flex-shrink:0;margin-top:2px;transition:all .2s;
-  font-family:var(--mono);
-}
+.a-num{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-2);flex-shrink:0;margin-top:2px;transition:all .2s;font-family:var(--mono);}
 .a-step.done .a-num{background:var(--green-bg);border-color:#22c55e;color:var(--green);font-size:13px}
 .a-step-body{flex:1}
 .a-step-title{font-size:13.5px;font-weight:500;margin-bottom:3px}
 .a-step-desc{font-size:13px;color:var(--text-2);line-height:1.5}
-.a-step-btn{
-  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
-  padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--border);
-  background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:500;
-  cursor:pointer;color:var(--text-2);transition:all .12s;
-}
+.a-step-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;color:var(--text-2);transition:all .12s;}
 .a-step-btn:hover{border-color:var(--border-strong);color:var(--text)}
 
-/* TICKET FORM */
+/* TICKET FLOW */
 .flow-bar{display:flex;align-items:center;margin-bottom:26px;gap:0}
 .fl-step{display:flex;align-items:center;gap:8px}
-.fl-num{
-  width:24px;height:24px;border-radius:50%;border:2px solid var(--border-strong);
-  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;
-  color:var(--text-3);font-family:var(--mono);transition:all .2s;
-}
+.fl-num{width:24px;height:24px;border-radius:50%;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-3);font-family:var(--mono);transition:all .2s;}
 .fl-num.on{border-color:var(--accent);color:var(--accent);background:var(--accent-2)}
 .fl-num.ok{border-color:#22c55e;background:var(--green-bg);color:var(--green)}
 .fl-label{font-size:12.5px;font-weight:500;color:var(--text-2)}
@@ -200,45 +152,53 @@ main{flex:1;padding:32px 36px;overflow-y:auto;max-width:900px}
 .fl-bar.ok{background:#22c55e}
 
 .type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.type-card{
-  background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);
-  padding:14px 12px;cursor:pointer;transition:all .13s;display:flex;flex-direction:column;
-  align-items:center;gap:8px;text-align:center;
-}
+.type-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;cursor:pointer;transition:all .13s;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;}
 .type-card:hover{border-color:var(--accent);background:var(--accent-2)}
 .type-card.sel{border-color:var(--accent);background:var(--accent-2)}
 .type-card-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center}
 .type-card-icon svg{width:18px;height:18px;stroke-width:1.8}
 .type-card-label{font-size:12.5px;font-weight:500;color:var(--text)}
 
+/* FORM */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fg{margin-bottom:16px}
 label.fl{font-size:12.5px;font-weight:500;color:var(--text);display:block;margin-bottom:5px}
 label.fl .req{color:#DC2626;margin-left:2px}
 label.fl .opt{font-size:11px;color:var(--text-3);font-weight:400;margin-left:4px}
-input.fi,textarea.fi,select.fi{
-  width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--r-sm);
-  font-family:var(--sans);font-size:13.5px;color:var(--text);background:var(--surface);
-  outline:none;transition:border .13s,box-shadow .13s;
-}
+input.fi,textarea.fi,select.fi{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--sans);font-size:13.5px;color:var(--text);background:var(--surface);outline:none;transition:border .13s,box-shadow .13s;}
 input.fi:focus,textarea.fi:focus,select.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(15,82,186,.1)}
 textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 .hint{font-size:11.5px;color:var(--text-3);margin-top:3px}
 
-.upload-zone{
-  border:1.5px dashed var(--border-strong);border-radius:var(--r);padding:22px;text-align:center;
-  cursor:pointer;transition:all .13s;color:var(--text-2);
-}
+/* IMPACTED USERS */
+.users-box{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:4px}
+.users-box-header{background:var(--bg);padding:10px 14px;font-size:12px;font-weight:600;color:var(--text-2);border-bottom:1px solid var(--border);}
+.user-entry{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface);}
+.user-entry:last-child{border-bottom:none}
+.user-entry-email{flex:1;font-size:13px;color:var(--text);font-family:var(--mono);}
+.user-entry-location{font-size:12px;padding:3px 8px;border-radius:999px;font-weight:500;}
+.user-entry-location.remote{background:#EEF2FF;color:#4338CA}
+.user-entry-location.office{background:#F0FDF4;color:#15803D}
+.user-entry-remove{width:22px;height:22px;border-radius:5px;border:none;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:14px;transition:all .12s;flex-shrink:0;}
+.user-entry-remove:hover{background:var(--red-bg);color:var(--red)}
+.add-user-row{display:flex;gap:8px;align-items:flex-end;padding:12px 14px;background:var(--bg);border-top:1px solid var(--border);}
+.add-user-row .fi-sm{padding:7px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--sans);color:var(--text);background:var(--surface);outline:none;flex:1;transition:border .13s;}
+.add-user-row .fi-sm:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(15,82,186,.1)}
+.location-toggle{display:flex;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;flex-shrink:0;}
+.location-toggle button{padding:7px 12px;border:none;background:var(--surface);font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;color:var(--text-2);transition:all .13s;}
+.location-toggle button.sel{background:var(--accent);color:#fff}
+.add-user-btn{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .13s;flex-shrink:0;}
+.add-user-btn:hover{background:#0A3A8A}
+
+/* UPLOAD */
+.upload-zone{border:1.5px dashed var(--border-strong);border-radius:var(--r);padding:22px;text-align:center;cursor:pointer;transition:all .13s;color:var(--text-2);}
 .upload-zone:hover{border-color:var(--accent);background:var(--accent-2);color:var(--accent-text)}
-.upload-zone svg{width:28px;height:28px;stroke-width:1.5;margin-bottom:6px;display:block;margin:0 auto 6px}
+.upload-zone svg{width:28px;height:28px;stroke-width:1.5;display:block;margin:0 auto 6px}
 .upload-zone p{font-size:13px}
 .upload-zone small{font-size:11px;color:var(--text-3)}
 
 /* ACK BOX */
-.ack-box{
-  border:1px solid #FCD34D;background:var(--amber-bg);border-radius:var(--r);
-  padding:14px 16px;display:flex;gap:12px;align-items:flex-start;margin-top:14px;
-}
+.ack-box{border:1px solid #FCD34D;background:var(--amber-bg);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;margin-top:14px;}
 .ack-box.ok{border-color:#4ADE80;background:var(--green-bg)}
 .ack-box svg{width:18px;height:18px;stroke-width:2;flex-shrink:0;stroke:#D97706;margin-top:1px}
 .ack-box.ok svg{stroke:#16A34A}
@@ -249,48 +209,36 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 .ack-check-row label{font-size:13px;font-weight:500;cursor:pointer}
 
 /* BUTTONS */
-.btn{
-  display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:var(--r-sm);
-  font-family:var(--sans);font-size:13.5px;font-weight:500;cursor:pointer;border:none;transition:all .13s;
-}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:var(--r-sm);font-family:var(--sans);font-size:13.5px;font-weight:500;cursor:pointer;border:none;transition:all .13s;}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:hover{background:#0A3A8A}
 .btn-primary:disabled{background:var(--border-strong);cursor:not-allowed}
 .btn-ghost{background:none;border:1px solid var(--border);color:var(--text-2)}
 .btn-ghost:hover{background:var(--bg);color:var(--text)}
 .btn-sm{padding:5px 12px;font-size:12.5px}
-.btn-green{background:#16A34A;color:#fff}
-.btn-green:hover{background:#15803D}
-
+.btn-red{background:var(--red-bg);color:var(--red);border:1px solid #FECACA}
+.btn-red:hover{background:#FEE2E2}
 .row-btns{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
 
 /* TICKET DETAIL MODAL */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(10,10,12,.45);z-index:200;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-}
+.modal-overlay{position:fixed;inset:0;background:rgba(10,10,12,.45);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{
-  background:var(--surface);border-radius:14px;width:560px;max-width:92vw;max-height:85vh;
-  overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.14);
-  transform:scale(.96) translateY(6px);transition:transform .2s;
-}
+.modal{background:var(--surface);border-radius:14px;width:580px;max-width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.14);transform:scale(.96) translateY(6px);transition:transform .2s;}
 .modal-overlay.open .modal{transform:scale(1) translateY(0)}
-.modal-header{
-  padding:20px 24px 16px;border-bottom:1px solid var(--border);
-  display:flex;align-items:flex-start;justify-content:space-between;
-  position:sticky;top:0;background:var(--surface);z-index:1;
-}
+.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:1;}
 .modal-title{font-size:16px;font-weight:600;margin-bottom:3px}
 .modal-sub{font-size:12.5px;color:var(--text-2)}
-.modal-close{
-  width:28px;height:28px;border-radius:6px;border:none;background:var(--surface2);
-  cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-2);
-  flex-shrink:0;font-size:16px;line-height:1;transition:background .12s;
-}
+.modal-close{width:28px;height:28px;border-radius:6px;border:none;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0;font-size:16px;line-height:1;transition:background .12s;}
 .modal-close:hover{background:var(--border)}
 .modal-body{padding:20px 24px}
+.modal-section-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:block}
+
+/* ISSUE DETAIL MODAL */
+.issue-modal-banner{background:var(--orange-bg);border:1px solid #FDBA74;border-radius:var(--r-sm);padding:12px 14px;margin-bottom:18px;font-size:13px;color:var(--orange);line-height:1.5;}
+.affected-users-list{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.affected-user-pill{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);}
+.affected-user-pill span{flex:1;font-size:13px;font-family:var(--mono);}
+.add-impacted-row{display:flex;gap:8px;align-items:center;margin-top:10px;}
 
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
 .detail-field label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px}
@@ -302,10 +250,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 .timeline{border-left:2px solid var(--border);padding-left:18px;margin-left:6px;margin-top:6px}
 .tl-item{position:relative;margin-bottom:16px}
 .tl-item:last-child{margin-bottom:0}
-.tl-dot{
-  position:absolute;left:-25px;top:3px;width:10px;height:10px;border-radius:50%;
-  background:var(--surface);border:2px solid var(--border-strong);
-}
+.tl-dot{position:absolute;left:-25px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--border-strong);}
 .tl-dot.active{border-color:var(--accent);background:var(--accent)}
 .tl-dot.done{border-color:#22c55e;background:#22c55e}
 .tl-time{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-bottom:2px}
@@ -319,22 +264,13 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 .success-ticket-num{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--accent);margin:12px 0}
 
 /* TOAST */
-.toast{
-  position:fixed;bottom:22px;right:22px;background:var(--text);color:#fff;
-  padding:11px 18px;border-radius:var(--r);font-size:13.5px;font-weight:500;
-  display:flex;align-items:center;gap:9px;z-index:300;
-  opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;
-}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--text);color:#fff;padding:11px 18px;border-radius:var(--r);font-size:13.5px;font-weight:500;display:flex;align-items:center;gap:9px;z-index:400;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;}
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.ok{background:#15803D}
 .toast.err{background:#DC2626}
 
 /* BACK BTN */
-.back-btn{
-  display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
-  background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans);
-  margin-bottom:16px;transition:color .12s;
-}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans);margin-bottom:16px;transition:color .12s;}
 .back-btn:hover{color:var(--text)}
 .back-btn svg{width:14px;height:14px;stroke-width:2}
 </style>
@@ -343,8 +279,8 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 
 <header>
   <div class="brand">
-    <div class="brand-dot">SP</div>
-    <span>Sponsors Support</span>
+    <div class="brand-dot">SA</div>
+    <span>Site Admin Portal</span>
     <div class="brand-sep"></div>
     <span class="brand-sub">Microsoft Project</span>
   </div>
@@ -361,6 +297,11 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
   <button class="nav-item active" onclick="nav('home',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
     Home
+  </button>
+  <button class="nav-item" onclick="nav('issues',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Ongoing Issues
+    <span class="nav-badge" id="issues-count-badge">2</span>
   </button>
   <button class="nav-item" onclick="nav('tickets',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
@@ -379,7 +320,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 
 <main>
 
-<!-- HOME -->
+<!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
 <div id="page-home" class="page active">
   <div class="welcome-banner">
     <div class="welcome-banner-icon">👋</div>
@@ -388,27 +329,41 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
       <p>This portal centralises all support for the Microsoft project — from troubleshooting guides to request tracking. Use the menu on the left to navigate.</p>
     </div>
   </div>
+
+  <!-- Active issues banner (shown when there are active issues) -->
+  <div class="issue-banner" id="home-issue-banner">
+    <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line stroke="currentColor" stroke-width="2" x1="12" y1="9" x2="12" y2="13"/><line stroke="currentColor" stroke-width="2" x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <div class="issue-banner-text" id="home-issue-banner-text"></div>
+  </div>
+
   <div class="quick-grid">
-    <div class="quick-card" onclick="nav('new-ticket', document.querySelector('.nav-item:nth-child(5)'))">
+    <div class="quick-card" onclick="nav('new-ticket', document.querySelector('.nav-item:nth-child(6)'))">
       <div class="quick-card-icon" style="background:#EFF6FF">
         <svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
       </div>
       <div class="quick-card-title">Open a New Request</div>
-      <div class="quick-card-desc">Report an issue. The portal will guide you through troubleshooting first.</div>
+      <div class="quick-card-desc">Report an issue with guided troubleshooting first.</div>
     </div>
-    <div class="quick-card" onclick="nav('tickets', document.querySelector('.nav-item:nth-child(2)'))">
+    <div class="quick-card" onclick="nav('issues', document.querySelector('.nav-item:nth-child(2)'))">
+      <div class="quick-card-icon" style="background:#FFF7ED">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="quick-card-title">Ongoing Issues</div>
+      <div class="quick-card-desc">View active outages and add yourself as impacted.</div>
+    </div>
+    <div class="quick-card" onclick="nav('tickets', document.querySelector('.nav-item:nth-child(3)'))">
       <div class="quick-card-icon" style="background:#F0FDF4">
         <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
       </div>
       <div class="quick-card-title">My Requests</div>
-      <div class="quick-card-desc">Track open requests and view the history of your closed tickets.</div>
+      <div class="quick-card-desc">Track open requests and view closed ticket history.</div>
     </div>
-    <div class="quick-card" onclick="nav('kb', document.querySelector('.nav-item:nth-child(3)'))">
+    <div class="quick-card" onclick="nav('kb', document.querySelector('.nav-item:nth-child(4)'))">
       <div class="quick-card-icon" style="background:#FEF9EC">
         <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
       </div>
       <div class="quick-card-title">Knowledge Base</div>
-      <div class="quick-card-desc">Self-service guides for the most common issues — no ticket needed.</div>
+      <div class="quick-card-desc">Self-service guides — resolve issues without a ticket.</div>
     </div>
   </div>
 
@@ -418,7 +373,18 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
   </div>
 </div>
 
-<!-- MY REQUESTS -->
+<!-- ════════════════════════════ ONGOING ISSUES ════════════════════════ -->
+<div id="page-issues" class="page">
+  <div class="page-head">
+    <div class="page-title">Ongoing Issues</div>
+    <div class="page-sub">Active outages and known issues affecting the Microsoft project. Click any issue to view details or add yourself as impacted.</div>
+  </div>
+  <div class="card" style="padding:0">
+    <div id="issues-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ MY REQUESTS ════════════════════════ -->
 <div id="page-tickets" class="page">
   <div class="page-head">
     <div class="page-title">My Requests</div>
@@ -429,7 +395,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
   </div>
 </div>
 
-<!-- KNOWLEDGE BASE -->
+<!-- ════════════════════════════ KNOWLEDGE BASE ════════════════════════ -->
 <div id="page-kb" class="page">
   <div id="kb-home-view">
     <div class="page-head">
@@ -438,56 +404,37 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     </div>
     <div class="kb-grid">
       <div class="kb-card" onclick="openKB('login')">
-        <div class="kb-card-top">
-          <div class="kb-icon" style="background:#EFF6FF"><svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-          <div class="kb-title">Login & Authentication</div>
-        </div>
+        <div class="kb-card-top"><div class="kb-icon" style="background:#EFF6FF"><svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="kb-title">Login & Authentication</div></div>
         <div class="kb-desc">VPN, MFA, SSO, password resets, account lockouts and access issues.</div>
         <div class="kb-count">8 guides</div>
       </div>
       <div class="kb-card" onclick="openKB('yubikey')">
-        <div class="kb-card-top">
-          <div class="kb-icon" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div class="kb-title">YubiKey</div>
-        </div>
+        <div class="kb-card-top"><div class="kb-icon" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="kb-title">YubiKey</div></div>
         <div class="kb-desc">Setup, registration, lost or broken keys, and re-provisioning procedures.</div>
         <div class="kb-count">5 guides</div>
       </div>
       <div class="kb-card" onclick="openKB('tools')">
-        <div class="kb-card-top">
-          <div class="kb-icon" style="background:#F5F3FF"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-          <div class="kb-title">Tools & Software</div>
-        </div>
+        <div class="kb-card-top"><div class="kb-icon" style="background:#F5F3FF"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="kb-title">Tools & Software</div></div>
         <div class="kb-desc">Teams, Outlook, SharePoint, Azure Portal and other client tool issues.</div>
         <div class="kb-count">12 guides</div>
       </div>
       <div class="kb-card" onclick="openKB('computer')">
-        <div class="kb-card-top">
-          <div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <div class="kb-title">Computer & Hardware</div>
-        </div>
+        <div class="kb-card-top"><div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="kb-title">Computer & Hardware</div></div>
         <div class="kb-desc">Updates, drivers, performance issues and peripheral troubleshooting.</div>
         <div class="kb-count">6 guides</div>
       </div>
       <div class="kb-card" onclick="openKB('newhire')">
-        <div class="kb-card-top">
-          <div class="kb-icon" style="background:#FDF2F8"><svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <div class="kb-title">New-hire Onboarding</div>
-        </div>
+        <div class="kb-card-top"><div class="kb-icon" style="background:#FDF2F8"><svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="kb-title">New-hire Onboarding</div></div>
         <div class="kb-desc">Wave registration, account provisioning and equipment assignment checklists.</div>
         <div class="kb-count">9 guides</div>
       </div>
       <div class="kb-card" onclick="openKB('locker')">
-        <div class="kb-card-top">
-          <div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="2"/><path d="M12 12v-4"/></svg></div>
-          <div class="kb-title">Lockers</div>
-        </div>
+        <div class="kb-card-top"><div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="2"/><path d="M12 12v-4"/></svg></div><div class="kb-title">Lockers</div></div>
         <div class="kb-desc">Assignment requests, access codes, malfunctions and floor coordination.</div>
         <div class="kb-count">3 guides</div>
       </div>
     </div>
   </div>
-
   <div id="kb-article-view" style="display:none">
     <button class="back-btn" onclick="closeKBArticle()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -501,7 +448,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
         <div class="ack-box" id="kb-ack-box">
           <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
           <div class="ack-body">
-            <strong>Still not resolved?</strong> If you have followed all the steps and the issue persists, you can open a request for the Sponsors team.
+            <strong>Still not resolved?</strong> If you have followed all steps and the issue persists, you can open a request for the Site Admin team.
             <div class="ack-check-row">
               <input type="checkbox" id="kb-ack-cb" onchange="handleKBAck(this)">
               <label for="kb-ack-cb">I have followed all steps and the issue is not resolved.</label>
@@ -516,23 +463,23 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
   </div>
 </div>
 
-<!-- NEW REQUEST FLOW -->
+<!-- ═══════════════════════════ NEW REQUEST FLOW ═══════════════════════ -->
 <div id="page-new-ticket" class="page">
   <div class="page-head">
     <div class="page-title">New Support Request</div>
     <div class="page-sub">Troubleshooting confirmation is required before a ticket is created.</div>
   </div>
 
-  <!-- STEP 1: Type -->
+  <!-- STEP 1 -->
   <div id="nt-step1">
     <div class="flow-bar">
-      <div class="fl-step"><div class="fl-num on" id="fn1">1</div><span class="fl-label on" id="fl1">Issue type</span></div>
-      <div class="fl-bar" id="fb1"></div>
-      <div class="fl-step"><div class="fl-num" id="fn2">2</div><span class="fl-label" id="fl2">Troubleshooting</span></div>
-      <div class="fl-bar" id="fb2"></div>
-      <div class="fl-step"><div class="fl-num" id="fn3">3</div><span class="fl-label" id="fl3">Details</span></div>
-      <div class="fl-bar" id="fb3"></div>
-      <div class="fl-step"><div class="fl-num" id="fn4">4</div><span class="fl-label" id="fl4">Confirmation</span></div>
+      <div class="fl-step"><div class="fl-num on">1</div><span class="fl-label on">Issue type</span></div>
+      <div class="fl-bar"></div>
+      <div class="fl-step"><div class="fl-num">2</div><span class="fl-label">Troubleshooting</span></div>
+      <div class="fl-bar"></div>
+      <div class="fl-step"><div class="fl-num">3</div><span class="fl-label">Details</span></div>
+      <div class="fl-bar"></div>
+      <div class="fl-step"><div class="fl-num">4</div><span class="fl-label">Confirmation</span></div>
     </div>
     <div class="card">
       <div class="card-title">What type of issue are you experiencing?</div>
@@ -572,14 +519,14 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     </div>
   </div>
 
-  <!-- STEP 2: Troubleshooting -->
+  <!-- STEP 2 -->
   <div id="nt-step2" style="display:none">
     <div class="flow-bar">
       <div class="fl-step"><div class="fl-num ok">✓</div><span class="fl-label">Issue type</span></div>
       <div class="fl-bar ok"></div>
       <div class="fl-step"><div class="fl-num on">2</div><span class="fl-label on">Troubleshooting</span></div>
-      <div class="fl-bar" id="fb2b"></div>
-      <div class="fl-step"><div class="fl-num" id="fn3b">3</div><span class="fl-label" id="fl3b">Details</span></div>
+      <div class="fl-bar"></div>
+      <div class="fl-step"><div class="fl-num">3</div><span class="fl-label">Details</span></div>
       <div class="fl-bar"></div>
       <div class="fl-step"><div class="fl-num">4</div><span class="fl-label">Confirmation</span></div>
     </div>
@@ -619,19 +566,51 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     </div>
     <div class="card">
       <div class="card-title">Request details <span id="form-type-badge" class="badge b-blue" style="font-size:11.5px;margin-left:8px"></span></div>
+
       <div class="fg">
         <label class="fl">Issue description <span class="req">*</span></label>
         <textarea class="fi" id="f-desc" placeholder="Describe what is happening and what you expected. Include any error messages."></textarea>
       </div>
+
+      <!-- Primary affected user (required) -->
       <div class="form-row">
         <div class="fg">
-          <label class="fl">User account affected <span class="req">*</span></label>
+          <label class="fl">Primary user account affected <span class="req">*</span></label>
           <input class="fi" id="f-user" placeholder="user@contoso.com">
         </div>
         <div class="fg">
-          <label class="fl">Working user sample <span class="opt">(if applicable)</span></label>
-          <input class="fi" id="f-sample" placeholder="colleague@contoso.com">
+          <label class="fl">Primary user location <span class="req">*</span></label>
+          <select class="fi" id="f-user-location">
+            <option value="">Select location…</option>
+            <option value="office">Office</option>
+            <option value="remote">Remote</option>
+          </select>
         </div>
+      </div>
+
+      <!-- Additional impacted users -->
+      <div class="fg">
+        <label class="fl">Additional impacted users <span class="opt">(if more than one)</span></label>
+        <div class="users-box">
+          <div class="users-box-header">Impacted users list</div>
+          <div id="impacted-users-list">
+            <div style="padding:14px 16px;font-size:13px;color:var(--text-3);text-align:center">No additional users added yet.</div>
+          </div>
+          <div class="add-user-row">
+            <input class="fi-sm" id="new-user-email" placeholder="user@contoso.com" onkeydown="if(event.key==='Enter')addImpactedUser()">
+            <div class="location-toggle">
+              <button id="loc-office" onclick="setNewUserLoc('office')" class="sel">Office</button>
+              <button id="loc-remote" onclick="setNewUserLoc('remote')">Remote</button>
+            </div>
+            <button class="add-user-btn" onclick="addImpactedUser()">+ Add user</button>
+          </div>
+        </div>
+        <div class="hint">Add each impacted user individually and indicate whether they are working from the office or remotely.</div>
+      </div>
+
+      <div class="fg">
+        <label class="fl">Working user sample <span class="opt">(if applicable)</span></label>
+        <input class="fi" id="f-sample" placeholder="colleague@contoso.com">
       </div>
       <div class="fg">
         <label class="fl">Tool / link affected <span class="opt">(if applicable)</span></label>
@@ -652,13 +631,13 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
           <p>Drag & drop or click to upload</p>
           <small>PNG, JPG, PDF — up to 10 MB</small>
         </div>
-        <div class="hint">Full-page screenshots of the error help the Sponsors team respond faster.</div>
+        <div class="hint">Full-page screenshots of the error help the team respond faster.</div>
       </div>
       <div class="row-btns">
         <button class="btn btn-ghost" onclick="toStep2()">← Back</button>
         <button class="btn btn-primary" onclick="submitTicket()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:15px;height:15px;stroke-width:2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Submit to Sponsors Team
+          Submit to Site Admin Team
         </button>
       </div>
     </div>
@@ -681,11 +660,11 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h2 style="font-size:18px;font-weight:600;margin-bottom:6px">Request submitted!</h2>
-        <p style="color:var(--text-2);font-size:13.5px;margin-bottom:4px">Your request has been received by the Sponsors team.</p>
-        <div class="success-ticket-num" id="done-ticket-num">#SP-0144</div>
+        <p style="color:var(--text-2);font-size:13.5px;margin-bottom:4px">Your request has been received by the Site Admin team.</p>
+        <div class="success-ticket-num" id="done-ticket-num">#SA-0144</div>
         <p style="color:var(--text-2);font-size:13px;margin-bottom:24px">Expected first response: <strong>2–4 hours</strong>. You can track progress in <em>My Requests</em>.</p>
         <div style="display:flex;gap:10px;justify-content:center">
-          <button class="btn btn-ghost" onclick="nav('tickets', document.querySelector('.nav-item:nth-child(2)'))">View My Requests</button>
+          <button class="btn btn-ghost" onclick="nav('tickets', document.querySelector('.nav-item:nth-child(3)'))">View My Requests</button>
           <button class="btn btn-primary" onclick="resetFlow()">Submit another →</button>
         </div>
       </div>
@@ -696,13 +675,13 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 </main>
 </div>
 
-<!-- TICKET DETAIL MODAL -->
+<!-- ══════════════════ TICKET DETAIL MODAL ══════════════════ -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
-  <div class="modal" id="modal-box">
+  <div class="modal">
     <div class="modal-header">
       <div>
-        <div class="modal-title" id="m-title">YubiKey not recognised on login</div>
-        <div class="modal-sub" id="m-sub">#SP-0141 &nbsp;·&nbsp; Submitted 5 hours ago</div>
+        <div class="modal-title" id="m-title"></div>
+        <div class="modal-sub" id="m-sub"></div>
       </div>
       <button class="modal-close" onclick="closeModal(null)">✕</button>
     </div>
@@ -712,8 +691,45 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
         <label>Description</label>
         <p id="m-desc"></p>
       </div>
-      <div style="margin-bottom:6px;font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em">Activity timeline</div>
+      <div id="m-users-section" style="display:none;margin-bottom:18px">
+        <span class="modal-section-label">Impacted users</span>
+        <div id="m-users-list" class="affected-users-list"></div>
+      </div>
+      <span class="modal-section-label">Activity timeline</span>
       <div class="timeline" id="m-timeline"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ ONGOING ISSUE DETAIL MODAL ══════════════════ -->
+<div class="modal-overlay" id="issue-modal-overlay" onclick="closeIssueModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="im-title"></div>
+        <div class="modal-sub" id="im-sub"></div>
+      </div>
+      <button class="modal-close" onclick="closeIssueModal(null)">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="im-banner" class="issue-modal-banner"></div>
+      <div class="detail-grid" id="im-grid"></div>
+      <div class="detail-desc">
+        <label>Description</label>
+        <p id="im-desc"></p>
+      </div>
+      <span class="modal-section-label">Impacted users (<span id="im-user-count">0</span>)</span>
+      <div class="affected-users-list" id="im-users-list"></div>
+      <div class="add-impacted-row">
+        <input class="fi-sm" id="im-new-user" placeholder="Add your account (user@contoso.com)" style="flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--sans);font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')addImpactedToIssue()">
+        <div class="location-toggle">
+          <button id="im-loc-office" onclick="setIssueLoc('office')" class="sel">Office</button>
+          <button id="im-loc-remote" onclick="setIssueLoc('remote')">Remote</button>
+        </div>
+        <button class="add-user-btn" onclick="addImpactedToIssue()">+ Add me</button>
+      </div>
+      <span class="modal-section-label" style="display:block;margin-top:18px">Updates</span>
+      <div class="timeline" id="im-timeline"></div>
     </div>
   </div>
 </div>
@@ -721,32 +737,71 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 <div class="toast" id="toast-el"></div>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════
 const tickets = [
-  {id:'#SP-0143',title:'VPN keeps disconnecting after 10 minutes',type:'Login / Account',priority:'Medium',status:'open',submitted:'Just now',desc:'After connecting to GlobalProtect, the VPN drops every 10 minutes approximately. I have tried reconnecting but it happens consistently.',timeline:[
+  {id:'#SA-0143',title:'VPN keeps disconnecting after 10 minutes',type:'Login / Account',priority:'Medium',status:'open',submitted:'Just now',desc:'After connecting to GlobalProtect, the VPN drops every 10 minutes approximately. I have tried reconnecting but it happens consistently.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'}],timeline:[
     {dot:'active',time:'Today 09:14',msg:'Request submitted via portal.',by:'You'},
-    {dot:'',time:'Today 09:14',msg:'Awaiting assignment to Sponsors team member.',by:'System'}
+    {dot:'',time:'Today 09:14',msg:'Awaiting assignment to Site Admin team member.',by:'System'}
   ]},
-  {id:'#SP-0141',title:'YubiKey not recognised on login',type:'YubiKey',priority:'Medium',status:'progress',submitted:'5h ago',desc:'Inserted YubiKey into USB-A port on laptop dock. The login page does not prompt for the key and shows "authentication method not available". Tried different USB ports.',timeline:[
+  {id:'#SA-0141',title:'YubiKey not recognised on login',type:'YubiKey',priority:'Medium',status:'progress',submitted:'5h ago',desc:'Inserted YubiKey into USB-A port on laptop dock. The login page does not prompt for the key and shows "authentication method not available". Tried different USB ports.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'ana.silva@contoso.com',location:'remote'}],timeline:[
     {dot:'done',time:'Today 06:50',msg:'Request submitted.',by:'You'},
-    {dot:'done',time:'Today 07:15',msg:'Assigned to Sara Mendes (Sponsors).',by:'System'},
-    {dot:'active',time:'Today 08:30',msg:'Sara is investigating — driver reinstall in progress on your machine.',by:'Sara M. · Sponsors'}
+    {dot:'done',time:'Today 07:15',msg:'Assigned to Sara Mendes (Site Admin).',by:'System'},
+    {dot:'active',time:'Today 08:30',msg:'Sara is investigating — driver reinstall in progress on your machine.',by:'Sara M. · Site Admin'}
   ]},
-  {id:'#SP-0139',title:'Locker assignment — floor 3',type:'Lockers',priority:'Low',status:'resolved',submitted:'2 days ago',desc:'New hire starting Monday needs a locker on floor 3. Please assign and send access code to their email before Friday.',timeline:[
+  {id:'#SA-0139',title:'Locker assignment — floor 3',type:'Lockers',priority:'Low',status:'resolved',submitted:'2 days ago',desc:'New hire starting Monday needs a locker on floor 3. Please assign and send access code to their email before Friday.',impactedUsers:[],timeline:[
     {dot:'done',time:'Mon 14:02',msg:'Request submitted.',by:'You'},
-    {dot:'done',time:'Mon 15:30',msg:'Locker 3-018 assigned. Code sent to new hire.',by:'Rui C. · Sponsors'},
+    {dot:'done',time:'Mon 15:30',msg:'Locker 3-018 assigned. Code sent to new hire.',by:'Rui C. · Site Admin'},
     {dot:'done',time:'Mon 15:31',msg:'Request closed.',by:'System'}
   ]},
-  {id:'#SP-0138',title:'Microsoft Teams video not loading',type:'Tools / Software',priority:'High',status:'resolved',submitted:'3 days ago',desc:'Video calls show black screen for all participants. Audio works. Happens in both desktop app and browser version.',timeline:[
+  {id:'#SA-0138',title:'Microsoft Teams video not loading',type:'Tools / Software',priority:'High',status:'resolved',submitted:'3 days ago',desc:'Video calls show black screen for all participants. Audio works. Happens in both desktop app and browser version.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'carla.neto@contoso.com',location:'office'},{email:'tiago.reis@contoso.com',location:'remote'}],timeline:[
     {dot:'done',time:'Fri 09:11',msg:'Request submitted.',by:'You'},
-    {dot:'done',time:'Fri 09:45',msg:'Assigned to Pedro Alves (Sponsors).',by:'System'},
-    {dot:'done',time:'Fri 11:00',msg:'Issue traced to GPU driver conflict. Driver updated remotely.',by:'Pedro A. · Sponsors'},
+    {dot:'done',time:'Fri 09:45',msg:'Assigned to Pedro Alves (Site Admin).',by:'System'},
+    {dot:'done',time:'Fri 11:00',msg:'Issue traced to GPU driver conflict. Driver updated remotely.',by:'Pedro A. · Site Admin'},
     {dot:'done',time:'Fri 11:20',msg:'Confirmed resolved by user. Ticket closed.',by:'System'}
   ]},
 ];
 
+const ongoingIssues = [
+  {
+    id:'ISS-007', severity:'critical',
+    title:'SharePoint Online — document library access errors',
+    category:'Tools / Software', started:'Today 08:20', eta:'Under investigation',
+    desc:'Multiple users are unable to open or edit documents in SharePoint Online. Access attempts return a 403 error. The issue appears to affect all document libraries. The Site Admin team is in contact with the Microsoft tenant support team.',
+    impactedUsers:[
+      {email:'pedro.alves@contoso.com',location:'office'},
+      {email:'margarida.costa@contoso.com',location:'remote'},
+      {email:'rui.carvalho@contoso.com',location:'office'},
+    ],
+    timeline:[
+      {dot:'done',time:'08:20',msg:'Issue first reported by operations.',by:'Auto-detect'},
+      {dot:'done',time:'08:35',msg:'Site Admin team confirmed the outage. Escalated to Microsoft Tenant Support.',by:'Sara M. · Site Admin'},
+      {dot:'active',time:'09:10',msg:'Investigation ongoing. Workaround: access files directly via OneDrive desktop app.',by:'Sara M. · Site Admin'},
+    ]
+  },
+  {
+    id:'ISS-006', severity:'warning',
+    title:'GlobalProtect VPN — intermittent disconnections',
+    category:'Login / Account', started:'Today 06:45', eta:'Fix expected 14:00',
+    desc:'Some users are experiencing VPN drops after 10–15 minutes of activity. The issue is linked to a gateway configuration change deployed this morning. A rollback is being prepared.',
+    impactedUsers:[
+      {email:'joao.martins@contoso.com',location:'office'},
+      {email:'ana.silva@contoso.com',location:'remote'},
+    ],
+    timeline:[
+      {dot:'done',time:'06:45',msg:'First reports received from remote users.',by:'Operations'},
+      {dot:'done',time:'07:30',msg:'Root cause identified: gateway config change from 06:00 deployment.',by:'Pedro A. · Site Admin'},
+      {dot:'active',time:'08:00',msg:'Rollback in progress. Estimated resolution by 14:00.',by:'Pedro A. · Site Admin'},
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════
+// KB DATA
+// ═══════════════════════════════════════════════════════════
 const kbData = {
-  login:{title:'Login & Authentication',desc:'Follow these steps before opening a request. Most login issues can be resolved without Sponsor intervention.',steps:[
+  login:{title:'Login & Authentication',desc:'Follow these steps before opening a request. Most login issues can be resolved without Site Admin intervention.',steps:[
     {t:'Check your VPN connection',d:'Ensure GlobalProtect is connected. Disconnect and reconnect, or try switching VPN gateway in the app.'},
     {t:'Clear browser cache & cookies',d:'In your browser, clear cache and cookies for the last 7 days. Close all windows and reopen.'},
     {t:'Try incognito mode or a different browser',d:'Open an incognito window or switch between Edge and Chrome. Many SSO issues are caused by browser extensions.'},
@@ -784,32 +839,153 @@ const kbData = {
   ]},
 };
 
-// ─── NAVIGATION ─────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
 function nav(id, btnEl){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
   if(btnEl) btnEl.classList.add('active');
   if(id==='home'||id==='tickets') renderTickets();
+  if(id==='home') renderHomeBanner();
+  if(id==='issues') renderIssues();
 }
 
-// ─── TICKETS ────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// HOME BANNER
+// ═══════════════════════════════════════════════════════════
+function renderHomeBanner(){
+  const banner = document.getElementById('home-issue-banner');
+  const text = document.getElementById('home-issue-banner-text');
+  const active = ongoingIssues.filter(i=>i.severity==='critical'||i.severity==='warning');
+  if(active.length===0){ banner.style.display='none'; return; }
+  banner.style.display='flex';
+  const crit = active.filter(i=>i.severity==='critical').length;
+  let msg = `<strong>${active.length} active issue${active.length>1?'s':''}</strong> affecting the project`;
+  if(crit>0) msg += ` — including ${crit} critical outage${crit>1?'s':''}`;
+  msg += '. <span style="cursor:pointer;text-decoration:underline" onclick="nav(\'issues\',document.querySelector(\'.nav-item:nth-child(2)\'))">View Ongoing Issues →</span>';
+  text.innerHTML = msg;
+}
+
+// ═══════════════════════════════════════════════════════════
+// ONGOING ISSUES
+// ═══════════════════════════════════════════════════════════
+function sevBadge(sev){
+  if(sev==='critical') return '<span class="badge b-red">Critical</span>';
+  if(sev==='warning')  return '<span class="badge b-orange">Warning</span>';
+  return '<span class="badge b-blue">Info</span>';
+}
+
+function renderIssues(){
+  const list = document.getElementById('issues-list');
+  document.getElementById('issues-count-badge').textContent = ongoingIssues.length;
+  if(ongoingIssues.length===0){
+    list.innerHTML='<div style="padding:28px;text-align:center;color:var(--text-3);font-size:13.5px">✅ No active issues — all systems operational.</div>';
+    return;
+  }
+  list.innerHTML = ongoingIssues.map((iss,i)=>`
+    <div class="issue-alert">
+      <div class="issue-alert-dot ${iss.severity}"></div>
+      <div class="issue-alert-body">
+        <div class="issue-alert-title">${iss.title}</div>
+        <div class="issue-alert-meta">${iss.category} &nbsp;·&nbsp; Started ${iss.started} &nbsp;·&nbsp; ${iss.impactedUsers.length} user${iss.impactedUsers.length!==1?'s':''} impacted &nbsp;·&nbsp; ETA: ${iss.eta}</div>
+      </div>
+      <div class="issue-alert-actions">
+        ${sevBadge(iss.severity)}
+        <button class="btn btn-ghost btn-sm" onclick="openIssueModal(${i})">View details</button>
+      </div>
+    </div>`).join('');
+}
+
+let currentIssueIdx = null;
+let issueLoc = 'office';
+
+function setIssueLoc(loc){
+  issueLoc=loc;
+  document.getElementById('im-loc-office').className = loc==='office'?'sel':'';
+  document.getElementById('im-loc-remote').className = loc==='remote'?'sel':'';
+}
+
+function openIssueModal(i){
+  currentIssueIdx = i;
+  issueLoc = 'office';
+  document.getElementById('im-loc-office').className='sel';
+  document.getElementById('im-loc-remote').className='';
+  document.getElementById('im-new-user').value='';
+  const iss = ongoingIssues[i];
+  document.getElementById('im-title').textContent = iss.title;
+  document.getElementById('im-sub').innerHTML = `${iss.id} &nbsp;·&nbsp; Started ${iss.started}`;
+  document.getElementById('im-banner').innerHTML = `⚠️ <strong>Active issue</strong> — the Site Admin team is currently investigating. ETA: <strong>${iss.eta}</strong>.`;
+  document.getElementById('im-grid').innerHTML = `
+    <div class="detail-field"><label>Severity</label><p>${sevBadge(iss.severity)}</p></div>
+    <div class="detail-field"><label>Category</label><p>${iss.category}</p></div>
+    <div class="detail-field"><label>Issue ID</label><p style="font-family:var(--mono);font-size:13px">${iss.id}</p></div>
+    <div class="detail-field"><label>ETA</label><p>${iss.eta}</p></div>`;
+  document.getElementById('im-desc').textContent = iss.desc;
+  renderIssueUsers(i);
+  document.getElementById('im-timeline').innerHTML = iss.timeline.map(tl=>`
+    <div class="tl-item">
+      <div class="tl-dot ${tl.dot}"></div>
+      <div class="tl-time">${tl.time}</div>
+      <div class="tl-msg">${tl.msg}</div>
+      <div class="tl-by">${tl.by}</div>
+    </div>`).join('');
+  document.getElementById('issue-modal-overlay').classList.add('open');
+}
+
+function renderIssueUsers(i){
+  const iss = ongoingIssues[i];
+  document.getElementById('im-user-count').textContent = iss.impactedUsers.length;
+  const list = document.getElementById('im-users-list');
+  if(iss.impactedUsers.length===0){
+    list.innerHTML='<div style="font-size:12.5px;color:var(--text-3);padding:6px 0">No users added yet. Add yourself below if you are impacted.</div>';
+    return;
+  }
+  list.innerHTML = iss.impactedUsers.map(u=>`
+    <div class="affected-user-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span>${u.email}</span>
+      <span class="user-entry-location ${u.location}">${u.location==='remote'?'Remote':'Office'}</span>
+    </div>`).join('');
+}
+
+function addImpactedToIssue(){
+  const email = document.getElementById('im-new-user').value.trim();
+  if(!email){ toast('Please enter a user account','err'); return; }
+  if(!email.includes('@')){ toast('Please enter a valid email address','err'); return; }
+  const iss = ongoingIssues[currentIssueIdx];
+  if(iss.impactedUsers.some(u=>u.email===email)){ toast('This user is already listed','err'); return; }
+  iss.impactedUsers.push({email, location:issueLoc});
+  document.getElementById('im-new-user').value='';
+  renderIssueUsers(currentIssueIdx);
+  renderIssues();
+  toast('User added to impacted list','ok');
+}
+
+function closeIssueModal(e){
+  if(e===null || e.target===document.getElementById('issue-modal-overlay'))
+    document.getElementById('issue-modal-overlay').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════
+// TICKETS
+// ═══════════════════════════════════════════════════════════
 function statusBadge(s){
-  if(s==='open') return '<span class="badge b-blue">Open</span>';
+  if(s==='open')     return '<span class="badge b-blue">Open</span>';
   if(s==='progress') return '<span class="badge b-amber">In progress</span>';
   if(s==='resolved') return '<span class="badge b-green">Resolved</span>';
   return '<span class="badge b-gray">'+s+'</span>';
 }
 function priorityBadge(p){
-  if(p==='High') return '<span class="badge b-red">High</span>';
+  if(p==='High')   return '<span class="badge b-red">High</span>';
   if(p==='Medium') return '<span class="badge b-amber">Medium</span>';
   return '<span class="badge b-gray">Low</span>';
 }
 
 function renderTickets(){
   ['home-tickets','all-tickets'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el) return;
+    const el=document.getElementById(id); if(!el) return;
     const list = id==='home-tickets' ? tickets.slice(0,3) : tickets;
     el.innerHTML = list.map((t,i)=>`
       <div class="ticket-row" onclick="openModal(${i})">
@@ -834,6 +1010,22 @@ function openModal(i){
     <div class="detail-field"><label>Priority</label><p>${priorityBadge(t.priority)}</p></div>
     <div class="detail-field"><label>Category</label><p>${t.type}</p></div>
     <div class="detail-field"><label>Ticket ID</label><p style="font-family:var(--mono);font-size:13px">${t.id}</p></div>`;
+
+  // Impacted users section
+  const usersSection = document.getElementById('m-users-section');
+  const usersList = document.getElementById('m-users-list');
+  if(t.impactedUsers && t.impactedUsers.length>0){
+    usersSection.style.display='block';
+    usersList.innerHTML = t.impactedUsers.map(u=>`
+      <div class="affected-user-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span>${u.email}</span>
+        <span class="user-entry-location ${u.location}">${u.location==='remote'?'Remote':'Office'}</span>
+      </div>`).join('');
+  } else {
+    usersSection.style.display='none';
+  }
+
   document.getElementById('m-timeline').innerHTML=t.timeline.map(tl=>`
     <div class="tl-item">
       <div class="tl-dot ${tl.dot}"></div>
@@ -848,7 +1040,9 @@ function closeModal(e){
     document.getElementById('modal-overlay').classList.remove('open');
 }
 
-// ─── KNOWLEDGE BASE ──────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// KNOWLEDGE BASE
+// ═══════════════════════════════════════════════════════════
 let kbStepsDone=0, kbTotalSteps=0;
 function openKB(type){
   const d=kbData[type];
@@ -872,7 +1066,7 @@ function openKB(type){
   document.getElementById('kb-ack-area').style.display='none';
   document.getElementById('kb-open-ticket-btn').style.display='none';
   const cb=document.getElementById('kb-ack-cb'); if(cb) cb.checked=false;
-  const box=document.getElementById('kb-ack-box'); if(box){box.className='ack-box';}
+  const box=document.getElementById('kb-ack-box'); if(box) box.className='ack-box';
 }
 function closeKBArticle(){
   document.getElementById('kb-home-view').style.display='';
@@ -882,8 +1076,7 @@ function markKBStep(i){
   const el=document.getElementById('kbs-'+i);
   if(el.classList.contains('done')) return;
   el.classList.add('done');
-  const numEl=document.getElementById('kbn-'+i);
-  numEl.textContent='✓';
+  document.getElementById('kbn-'+i).textContent='✓';
   el.querySelector('.a-step-btn').remove();
   kbStepsDone++;
   if(kbStepsDone===kbTotalSteps) document.getElementById('kb-ack-area').style.display='block';
@@ -895,16 +1088,18 @@ function handleKBAck(cb){
   else{ box.className='ack-box'; btnArea.style.display='none'; }
 }
 function goToNewTicketFromKB(){
-  nav('new-ticket', document.querySelector('.nav-item:nth-child(5)'));
+  nav('new-ticket', document.querySelector('.nav-item:nth-child(6)'));
 }
 
-// ─── NEW REQUEST FLOW ────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// NEW REQUEST FLOW
+// ═══════════════════════════════════════════════════════════
 let selectedType=null, tsStepsDone=0, tsTotalSteps=0, ticketNum=144;
+let impactedUsers=[], newUserLoc='office';
 
 function selectType(el,type){
   document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  selectedType=type;
+  el.classList.add('sel'); selectedType=type;
   document.getElementById('btn-to-step2').disabled=false;
 }
 function toStep1(){
@@ -956,35 +1151,95 @@ function toStep3(){
   document.getElementById('nt-step3').style.display='';
   const names={login:'Login / Account',yubikey:'YubiKey',tools:'Tools / Software',computer:'Computer',newhire:'New-hire Wave',locker:'Lockers'};
   document.getElementById('form-type-badge').textContent=names[selectedType]||'General';
+  impactedUsers=[];
+  newUserLoc='office';
+  document.getElementById('loc-office').className='sel';
+  document.getElementById('loc-remote').className='';
+  renderImpactedUsers();
 }
+
+function setNewUserLoc(loc){
+  newUserLoc=loc;
+  document.getElementById('loc-office').className=loc==='office'?'sel':'';
+  document.getElementById('loc-remote').className=loc==='remote'?'sel':'';
+}
+
+function addImpactedUser(){
+  const email=document.getElementById('new-user-email').value.trim();
+  if(!email){ toast('Please enter a user account','err'); return; }
+  if(!email.includes('@')){ toast('Please enter a valid email address','err'); return; }
+  if(impactedUsers.some(u=>u.email===email)){ toast('This user is already in the list','err'); return; }
+  impactedUsers.push({email, location:newUserLoc});
+  document.getElementById('new-user-email').value='';
+  renderImpactedUsers();
+  toast('User added','ok');
+}
+
+function removeImpactedUser(idx){
+  impactedUsers.splice(idx,1);
+  renderImpactedUsers();
+}
+
+function renderImpactedUsers(){
+  const list=document.getElementById('impacted-users-list');
+  if(impactedUsers.length===0){
+    list.innerHTML='<div style="padding:14px 16px;font-size:13px;color:var(--text-3);text-align:center">No additional users added yet.</div>';
+    return;
+  }
+  list.innerHTML=impactedUsers.map((u,i)=>`
+    <div class="user-entry">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span class="user-entry-email">${u.email}</span>
+      <span class="user-entry-location ${u.location}">${u.location==='remote'?'Remote':'Office'}</span>
+      <button class="user-entry-remove" onclick="removeImpactedUser(${i})" title="Remove">✕</button>
+    </div>`).join('');
+}
+
 function submitTicket(){
   const desc=document.getElementById('f-desc').value.trim();
   const user=document.getElementById('f-user').value.trim();
-  if(!desc||!user){toast('Please fill in all required fields','err');return;}
-  document.getElementById('done-ticket-num').textContent='#SP-0'+ticketNum;
-  tickets.unshift({id:'#SP-0'+ticketNum,title:desc.substring(0,55)+(desc.length>55?'…':''),type:document.getElementById('form-type-badge').textContent,priority:document.getElementById('f-priority').options[document.getElementById('f-priority').selectedIndex].text.split('—')[0].trim(),status:'open',submitted:'Just now',desc:desc,timeline:[{dot:'active',time:'Now',msg:'Request submitted via portal.',by:'You'},{dot:'',time:'Now',msg:'Awaiting assignment.',by:'System'}]});
+  const loc=document.getElementById('f-user-location').value;
+  if(!desc||!user){ toast('Please fill in all required fields','err'); return; }
+  if(!loc){ toast('Please select the primary user\'s location','err'); return; }
+  const allUsers=[{email:user,location:loc},...impactedUsers];
+  document.getElementById('done-ticket-num').textContent='#SA-0'+ticketNum;
+  tickets.unshift({
+    id:'#SA-0'+ticketNum,
+    title:desc.substring(0,55)+(desc.length>55?'…':''),
+    type:document.getElementById('form-type-badge').textContent,
+    priority:document.getElementById('f-priority').options[document.getElementById('f-priority').selectedIndex].text.split('—')[0].trim(),
+    status:'open',submitted:'Just now',desc,impactedUsers:allUsers,
+    timeline:[
+      {dot:'active',time:'Now',msg:'Request submitted via portal.',by:'You'},
+      {dot:'',time:'Now',msg:'Awaiting assignment.',by:'System'}
+    ]
+  });
   ticketNum++;
   document.getElementById('nt-step3').style.display='none';
   document.getElementById('nt-step4').style.display='';
   toast('Request submitted!','ok');
 }
+
 function resetFlow(){
-  selectedType=null; tsStepsDone=0;
+  selectedType=null; tsStepsDone=0; impactedUsers=[];
   document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('sel'));
   document.getElementById('btn-to-step2').disabled=true;
   document.getElementById('nt-step4').style.display='none';
   document.getElementById('nt-step1').style.display='';
   document.getElementById('f-desc').value=''; document.getElementById('f-user').value='';
+  document.getElementById('f-user-location').value='';
   document.getElementById('f-sample').value=''; document.getElementById('f-link').value='';
 }
 
-function toast(msg, type){
+function toast(msg,type){
   const el=document.getElementById('toast-el');
   el.textContent=msg; el.className='toast '+(type||'')+' show';
   setTimeout(()=>el.classList.remove('show'),2800);
 }
 
+// ── Init ──
 renderTickets();
+renderHomeBanner();
 </script>
 </body>
 </html>
