@@ -6,469 +6,627 @@
 <title>Site Admin Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F7F6F3;--surface:#FFFFFF;--surface2:#F0EFEB;--border:#E2E0DA;
-  --border-strong:#C8C5BC;--text:#18181A;--text-2:#6B6863;--text-3:#A8A5A0;
-  --accent:#0F52BA;--accent-2:#D6E4FF;--accent-text:#0A3A8A;
-  --green:#15803D;--green-bg:#DCFCE7;--amber:#92400E;--amber-bg:#FEF3C7;
-  --red:#991B1B;--red-bg:#FEE2E2;--blue-bg:#EFF6FF;--blue-text:#1D4ED8;
+  /* TP Brand */
+  --tp-crimson:#C8006E;
+  --tp-crimson-dark:#A0005A;
+  --tp-crimson-light:#F5E6EE;
+  --tp-purple-hero:#1E1030;
+  --tp-purple-mid:#2D1B4E;
+  --tp-purple-accent:#6B21A8;
+  /* Neutrals */
+  --bg:#F2F2F2;
+  --surface:#FFFFFF;
+  --surface2:#F7F7F7;
+  --border:#E5E5E5;
+  --border-strong:#CCCCCC;
+  --text:#1A1A1A;
+  --text-2:#555555;
+  --text-3:#999999;
+  /* Status */
+  --green:#15803D;--green-bg:#DCFCE7;
+  --amber:#92400E;--amber-bg:#FEF3C7;
+  --red:#991B1B;--red-bg:#FEE2E2;
   --orange:#C2410C;--orange-bg:#FFF7ED;
-  --r:10px;--r-sm:6px;--mono:'JetBrains Mono',monospace;--sans:'Sora',sans-serif;
+  --blue-bg:#EFF6FF;--blue-text:#1D4ED8;
+  /* Nav active */
+  --nav-active-bg:#EEF2FF;
+  --nav-active-text:#1A1A1A;
+  /* Radii */
+  --r:8px;--r-sm:5px;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',sans-serif;
 }
-body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
 
-/* HEADER */
-header{background:var(--surface);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 28px;gap:14px;position:sticky;top:0;z-index:100;}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;color:var(--text)}
-.brand-dot{width:30px;height:30px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;letter-spacing:-0.5px;font-family:var(--mono);}
-.brand-sep{width:1px;height:20px;background:var(--border);margin:0 4px}
-.brand-sub{font-size:12.5px;color:var(--text-2);font-weight:400}
-.header-user{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);padding:5px 12px 5px 5px;border:1px solid var(--border);border-radius:999px;cursor:default;}
-.avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+/* ── TOP BAR (TP-style: black) ─────────────────────────── */
+.topbar{
+  background:#111111;
+  height:52px;display:flex;align-items:center;padding:0 20px;gap:0;
+  position:sticky;top:0;z-index:200;
+}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.topbar-logo{
+  width:32px;height:32px;border-radius:6px;
+  background:var(--tp-crimson);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:#fff;letter-spacing:-0.5px;
+}
+.topbar-title{font-size:14px;font-weight:600;color:#fff;letter-spacing:0.01em}
+.topbar-divider{width:1px;height:18px;background:#333;margin:0 14px}
+.topbar-subtitle{font-size:12px;color:#999;font-weight:400}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:6px}
+.topbar-link{
+  font-size:12.5px;color:#ccc;padding:5px 10px;border-radius:4px;
+  cursor:pointer;transition:all .12s;background:none;border:none;font-family:var(--sans);
+}
+.topbar-link:hover{color:#fff;background:#222}
+/* crimson accent bar under topbar */
+.accent-bar{height:3px;background:linear-gradient(90deg,var(--tp-crimson) 0%,#E0006E 50%,var(--tp-crimson-dark) 100%)}
 
-/* LAYOUT */
-.layout{display:flex;min-height:calc(100vh - 58px)}
-nav.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);padding:18px 10px;display:flex;flex-direction:column;gap:2px;position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--text-2);cursor:pointer;transition:all 0.14s;border:none;background:none;font-family:var(--sans);width:100%;text-align:left;}
-.nav-item svg{width:16px;height:16px;flex-shrink:0;stroke-width:1.8}
-.nav-item:hover{background:var(--bg);color:var(--text)}
-.nav-item.active{background:var(--accent-2);color:var(--accent-text);font-weight:500}
-.nav-item.active svg{stroke:var(--accent)}
-.nav-sep{height:1px;background:var(--border);margin:8px 4px}
-.nav-section-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);padding:4px 12px 2px}
-.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:999px;font-family:var(--mono);}
+/* ── LAYOUT ────────────────────────────────────────────── */
+.layout{display:flex;min-height:calc(100vh - 55px)}
 
-main{flex:1;padding:32px 36px;overflow-y:auto;max-width:920px}
+/* ── LEFT SIDEBAR (TP-style: white, wide, avatar at top) ─ */
+nav.sidebar{
+  width:240px;background:#fff;border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:55px;height:calc(100vh - 55px);overflow-y:auto;
+  flex-shrink:0;
+}
+.sidebar-user{
+  padding:28px 20px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  border-bottom:1px solid var(--border);
+}
+.sidebar-avatar-wrap{position:relative;display:inline-block}
+.sidebar-avatar{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--tp-purple-mid),var(--tp-crimson));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:#fff;
+  border:3px solid var(--border);
+}
+.sidebar-avatar-ring{
+  position:absolute;inset:-4px;border-radius:50%;
+  border:2px solid var(--tp-crimson);opacity:.35;
+}
+.sidebar-username{font-size:13.5px;font-weight:600;color:var(--text);text-align:center}
+.sidebar-role{font-size:11.5px;color:var(--text-3);text-align:center}
 
-/* PAGE */
+.sidebar-nav{padding:12px 10px;flex:1}
+.nav-section-label{
+  font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-3);padding:8px 10px 4px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:11px;padding:10px 12px;
+  border-radius:var(--r-sm);font-size:13.5px;color:var(--text-2);
+  cursor:pointer;transition:all .12s;border:none;background:none;
+  font-family:var(--sans);width:100%;text-align:left;margin-bottom:1px;
+}
+.nav-item svg{width:17px;height:17px;flex-shrink:0;stroke-width:1.7;stroke:var(--text-3)}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item:hover svg{stroke:var(--text-2)}
+.nav-item.active{background:var(--nav-active-bg);color:var(--text);font-weight:500}
+.nav-item.active svg{stroke:var(--tp-crimson)}
+.nav-sep{height:1px;background:var(--border);margin:8px 6px}
+.nav-badge{
+  margin-left:auto;background:var(--tp-crimson);color:#fff;
+  font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;
+  font-family:var(--mono);
+}
+.nav-item-new{color:var(--tp-crimson)!important;font-weight:500}
+.nav-item-new svg{stroke:var(--tp-crimson)!important}
+.nav-item-new:hover{background:var(--tp-crimson-light)!important}
+
+/* ── MAIN ───────────────────────────────────────────────── */
+main{flex:1;overflow-y:auto;min-width:0}
+
+/* ── HERO BANNER (TP-style: dark purple) ─────────────────── */
+.hero{
+  background:linear-gradient(135deg,var(--tp-purple-hero) 0%,var(--tp-purple-mid) 60%,#3D1060 100%);
+  padding:32px 36px 28px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;right:-60px;top:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,0,110,.18) 0%,transparent 70%);
+}
+.hero::after{
+  content:'';position:absolute;left:30%;bottom:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(107,33,168,.25) 0%,transparent 70%);
+}
+.hero-greeting{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
+.hero-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.65);max-width:520px;line-height:1.5}
+
+/* active issues banner inside hero */
+.hero-alert{
+  margin-top:18px;background:rgba(200,0,110,.15);
+  border:1px solid rgba(200,0,110,.35);border-radius:6px;
+  padding:10px 14px;display:flex;align-items:center;gap:10px;
+  font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.4;
+}
+.hero-alert svg{width:15px;height:15px;stroke:var(--tp-crimson);flex-shrink:0;stroke-width:2}
+.hero-alert strong{color:#fff}
+.hero-alert a{color:var(--tp-crimson);text-decoration:underline;cursor:pointer}
+
+/* ── PAGE CONTENT ───────────────────────────────────────── */
+.content-area{padding:24px 32px}
+
+/* ── PAGE ───────────────────────────────────────────────── */
 .page{display:none}
-.page.active{display:block;animation:fadein .18s ease}
-@keyframes fadein{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.page-head{margin-bottom:24px}
-.page-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:3px}
-.page-sub{font-size:13.5px;color:var(--text-2)}
+.page.active{display:block;animation:fadein .16s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.page-head{margin-bottom:22px}
+.page-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:3px}
+.page-sub{font-size:13px;color:var(--text-2)}
 
-/* CARDS */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
-.card+.card{margin-top:16px}
-.card-title{font-size:14.5px;font-weight:600;margin-bottom:14px}
+/* ── CARDS ───────────────────────────────────────────────── */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.card+.card{margin-top:14px}
+.card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px}
 .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 
-/* WELCOME BANNER */
-.welcome-banner{background:var(--accent);color:#fff;border-radius:var(--r);padding:22px 26px;margin-bottom:20px;display:flex;align-items:center;gap:18px;}
-.welcome-banner-text h2{font-size:17px;font-weight:600;margin-bottom:3px}
-.welcome-banner-text p{font-size:13px;opacity:.82;line-height:1.5}
-.welcome-banner-icon{font-size:36px;opacity:.7}
-
-/* QUICK ACTIONS */
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.quick-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px;cursor:pointer;transition:all .14s;display:flex;flex-direction:column;gap:10px;text-align:left;}
-.quick-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(15,82,186,.08);transform:translateY(-1px)}
-.quick-card-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+/* ── QUICK ACTIONS ───────────────────────────────────────── */
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.quick-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r);
+  padding:18px 16px;cursor:pointer;transition:all .14s;
+  display:flex;flex-direction:column;gap:10px;text-align:left;
+}
+.quick-card:hover{border-color:var(--tp-crimson);box-shadow:0 2px 12px rgba(200,0,110,.08);transform:translateY(-1px)}
+.quick-card-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .quick-card-icon svg{width:20px;height:20px;stroke-width:1.8}
 .quick-card-title{font-size:13px;font-weight:600;color:var(--text)}
 .quick-card-desc{font-size:11.5px;color:var(--text-2);line-height:1.45}
 
-/* TICKETS LIST */
-.tickets-list{display:flex;flex-direction:column;gap:0}
-.ticket-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+/* ── TICKETS LIST ────────────────────────────────────────── */
+.tickets-list{display:flex;flex-direction:column}
+.ticket-row{
+  display:flex;align-items:center;gap:14px;padding:13px 16px;
+  border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;
+}
 .ticket-row:last-child{border-bottom:none}
-.ticket-row:hover{background:var(--bg)}
-.ticket-row:first-child{border-top:1px solid var(--border);margin-top:-1px}
-.ticket-id-tag{font-family:var(--mono);font-size:11.5px;color:var(--text-2);min-width:72px}
+.ticket-row:hover{background:var(--surface2)}
+.ticket-id-tag{font-family:var(--mono);font-size:11px;color:var(--text-3);min-width:72px}
 .ticket-info{flex:1}
 .ticket-title{font-size:13.5px;font-weight:500;color:var(--text);margin-bottom:2px}
-.ticket-meta{font-size:12px;color:var(--text-3)}
-.ticket-chevron{color:var(--text-3)}
-.ticket-chevron svg{width:14px;height:14px;stroke-width:2}
+.ticket-meta{font-size:11.5px;color:var(--text-3)}
+.ticket-chevron svg{width:14px;height:14px;stroke-width:2;stroke:var(--text-3)}
 
-/* ONGOING ISSUES */
-.issue-alert{
-  display:flex;align-items:flex-start;gap:14px;padding:16px 18px;
-  border-bottom:1px solid var(--border);transition:background .12s;
-}
+/* ── ONGOING ISSUES ──────────────────────────────────────── */
+.issue-alert{display:flex;align-items:flex-start;gap:14px;padding:15px 18px;border-bottom:1px solid var(--border);transition:background .1s}
 .issue-alert:last-child{border-bottom:none}
-.issue-alert-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;animation:pulse 2s infinite;}
+.issue-alert-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:6px;animation:pulse 2s infinite}
 .issue-alert-dot.critical{background:var(--red)}
 .issue-alert-dot.warning{background:var(--orange)}
-.issue-alert-dot.info{background:var(--accent)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .issue-alert-body{flex:1}
 .issue-alert-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:2px}
-.issue-alert-meta{font-size:12px;color:var(--text-2);line-height:1.4}
+.issue-alert-meta{font-size:12px;color:var(--text-2)}
 .issue-alert-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.issue-banner{
-  background:var(--orange-bg);border:1px solid #FDBA74;border-radius:var(--r);
-  padding:13px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;
-}
-.issue-banner svg{width:16px;height:16px;flex-shrink:0;stroke:var(--orange);stroke-width:2}
-.issue-banner-text{font-size:13px;color:var(--orange);line-height:1.4}
-.issue-banner-text strong{font-weight:600}
 
-/* BADGE */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:500;}
+/* ── BADGE ───────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600}
 .b-green{background:var(--green-bg);color:var(--green)}
 .b-amber{background:var(--amber-bg);color:var(--amber)}
 .b-blue{background:var(--blue-bg);color:var(--blue-text)}
 .b-red{background:var(--red-bg);color:var(--red)}
-.b-gray{background:var(--surface2);color:var(--text-2)}
+.b-gray{background:#EFEFEF;color:var(--text-2)}
 .b-orange{background:var(--orange-bg);color:var(--orange)}
+.b-crimson{background:var(--tp-crimson-light);color:var(--tp-crimson)}
 
-/* KNOWLEDGE BASE */
-.kb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.kb-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .14s;}
-.kb-card:hover{border-color:var(--accent);background:var(--blue-bg)}
+/* ── KNOWLEDGE BASE ──────────────────────────────────────── */
+.kb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.kb-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .13s}
+.kb-card:hover{border-color:var(--tp-crimson);box-shadow:0 2px 10px rgba(200,0,110,.07)}
 .kb-card-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .kb-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .kb-icon svg{width:18px;height:18px;stroke-width:1.8}
-.kb-title{font-size:14px;font-weight:600}
-.kb-desc{font-size:12.5px;color:var(--text-2);line-height:1.45}
-.kb-count{font-size:11px;color:var(--text-3);margin-top:6px}
+.kb-title{font-size:13.5px;font-weight:600;color:var(--text)}
+.kb-desc{font-size:12px;color:var(--text-2);line-height:1.45}
+.kb-count{font-size:11px;color:var(--text-3);margin-top:5px}
 
-/* ARTICLE STEPS */
-.article-steps{display:flex;flex-direction:column;gap:0;margin-top:4px}
+/* ── ARTICLE STEPS ───────────────────────────────────────── */
+.article-steps{display:flex;flex-direction:column}
 .a-step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
 .a-step:last-child{border-bottom:none}
-.a-num{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-2);flex-shrink:0;margin-top:2px;transition:all .2s;font-family:var(--mono);}
-.a-step.done .a-num{background:var(--green-bg);border-color:#22c55e;color:var(--green);font-size:13px}
+.a-num{
+  width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-strong);
+  display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;
+  color:var(--text-2);flex-shrink:0;margin-top:2px;transition:all .2s;font-family:var(--mono);
+}
+.a-step.done .a-num{background:var(--green-bg);border-color:#22c55e;color:var(--green)}
 .a-step-body{flex:1}
 .a-step-title{font-size:13.5px;font-weight:500;margin-bottom:3px}
 .a-step-desc{font-size:13px;color:var(--text-2);line-height:1.5}
-.a-step-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;color:var(--text-2);transition:all .12s;}
-.a-step-btn:hover{border-color:var(--border-strong);color:var(--text)}
+.a-step-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  padding:6px 14px;border-radius:var(--r-sm);border:1px solid var(--border);
+  background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:500;
+  cursor:pointer;color:var(--text-2);transition:all .12s;
+}
+.a-step-btn:hover{background:#fff;border-color:var(--tp-crimson);color:var(--tp-crimson)}
 
-/* TICKET FLOW */
-.flow-bar{display:flex;align-items:center;margin-bottom:26px;gap:0}
-.fl-step{display:flex;align-items:center;gap:8px}
-.fl-num{width:24px;height:24px;border-radius:50%;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-3);font-family:var(--mono);transition:all .2s;}
-.fl-num.on{border-color:var(--accent);color:var(--accent);background:var(--accent-2)}
-.fl-num.ok{border-color:#22c55e;background:var(--green-bg);color:var(--green)}
-.fl-label{font-size:12.5px;font-weight:500;color:var(--text-2)}
+/* ── TICKET FLOW STEPPER ─────────────────────────────────── */
+.flow-bar{display:flex;align-items:center;margin-bottom:24px}
+.fl-step{display:flex;align-items:center;gap:7px}
+.fl-num{
+  width:24px;height:24px;border-radius:50%;border:2px solid var(--border-strong);
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;
+  color:var(--text-3);font-family:var(--mono);transition:all .2s;
+}
+.fl-num.on{border-color:var(--tp-crimson);color:var(--tp-crimson);background:var(--tp-crimson-light)}
+.fl-num.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.fl-label{font-size:12px;font-weight:500;color:var(--text-3)}
 .fl-label.on{color:var(--text)}
-.fl-bar{flex:1;height:1.5px;background:var(--border);margin:0 10px}
-.fl-bar.ok{background:#22c55e}
+.fl-bar{flex:1;height:1.5px;background:var(--border);margin:0 8px}
+.fl-bar.ok{background:var(--green)}
 
-.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.type-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 12px;cursor:pointer;transition:all .13s;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;}
-.type-card:hover{border-color:var(--accent);background:var(--accent-2)}
-.type-card.sel{border-color:var(--accent);background:var(--accent-2)}
-.type-card-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+/* ── TYPE GRID ───────────────────────────────────────────── */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+.type-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--r);
+  padding:14px 12px;cursor:pointer;transition:all .12s;
+  display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+}
+.type-card:hover{border-color:var(--tp-crimson);background:var(--tp-crimson-light)}
+.type-card.sel{border-color:var(--tp-crimson);background:var(--tp-crimson-light)}
+.type-card-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .type-card-icon svg{width:18px;height:18px;stroke-width:1.8}
-.type-card-label{font-size:12.5px;font-weight:500;color:var(--text)}
+.type-card-label{font-size:12px;font-weight:500;color:var(--text)}
 
-/* FORM */
+/* ── FORM ────────────────────────────────────────────────── */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fg{margin-bottom:16px}
-label.fl{font-size:12.5px;font-weight:500;color:var(--text);display:block;margin-bottom:5px}
-label.fl .req{color:#DC2626;margin-left:2px}
+label.fl{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:5px;letter-spacing:.01em}
+label.fl .req{color:var(--tp-crimson);margin-left:2px}
 label.fl .opt{font-size:11px;color:var(--text-3);font-weight:400;margin-left:4px}
-input.fi,textarea.fi,select.fi{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--sans);font-size:13.5px;color:var(--text);background:var(--surface);outline:none;transition:border .13s,box-shadow .13s;}
-input.fi:focus,textarea.fi:focus,select.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(15,82,186,.1)}
+input.fi,textarea.fi,select.fi{
+  width:100%;padding:8px 11px;border:1px solid var(--border-strong);border-radius:var(--r-sm);
+  font-family:var(--sans);font-size:13.5px;color:var(--text);background:#fff;
+  outline:none;transition:border .12s,box-shadow .12s;
+}
+input.fi:focus,textarea.fi:focus,select.fi:focus{
+  border-color:var(--tp-crimson);box-shadow:0 0 0 3px rgba(200,0,110,.1);
+}
 textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
-.hint{font-size:11.5px;color:var(--text-3);margin-top:3px}
+.hint{font-size:11px;color:var(--text-3);margin-top:3px}
 
-/* IMPACTED USERS */
-.users-box{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:4px}
-.users-box-header{background:var(--bg);padding:10px 14px;font-size:12px;font-weight:600;color:var(--text-2);border-bottom:1px solid var(--border);}
-.user-entry{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface);}
+/* ── IMPACTED USERS ──────────────────────────────────────── */
+.users-box{border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.users-box-header{background:var(--surface2);padding:9px 14px;font-size:11.5px;font-weight:600;color:var(--text-2);border-bottom:1px solid var(--border)}
+.user-entry{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);background:#fff}
 .user-entry:last-child{border-bottom:none}
-.user-entry-email{flex:1;font-size:13px;color:var(--text);font-family:var(--mono);}
-.user-entry-location{font-size:12px;padding:3px 8px;border-radius:999px;font-weight:500;}
+.user-entry-email{flex:1;font-size:12.5px;color:var(--text);font-family:var(--mono)}
+.user-entry-location{font-size:11px;padding:2px 8px;border-radius:999px;font-weight:600}
 .user-entry-location.remote{background:#EEF2FF;color:#4338CA}
-.user-entry-location.office{background:#F0FDF4;color:#15803D}
-.user-entry-remove{width:22px;height:22px;border-radius:5px;border:none;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:14px;transition:all .12s;flex-shrink:0;}
+.user-entry-location.office{background:var(--green-bg);color:var(--green)}
+.user-entry-remove{width:20px;height:20px;border-radius:4px;border:none;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:13px;transition:all .12s;flex-shrink:0}
 .user-entry-remove:hover{background:var(--red-bg);color:var(--red)}
-.add-user-row{display:flex;gap:8px;align-items:flex-end;padding:12px 14px;background:var(--bg);border-top:1px solid var(--border);}
-.add-user-row .fi-sm{padding:7px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--sans);color:var(--text);background:var(--surface);outline:none;flex:1;transition:border .13s;}
-.add-user-row .fi-sm:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(15,82,186,.1)}
-.location-toggle{display:flex;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;flex-shrink:0;}
-.location-toggle button{padding:7px 12px;border:none;background:var(--surface);font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;color:var(--text-2);transition:all .13s;}
-.location-toggle button.sel{background:var(--accent);color:#fff}
-.add-user-btn{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .13s;flex-shrink:0;}
-.add-user-btn:hover{background:#0A3A8A}
+.add-user-row{display:flex;gap:8px;align-items:center;padding:10px 14px;background:var(--surface2);border-top:1px solid var(--border)}
+.add-user-row .fi-sm{padding:7px 10px;font-size:13px;border:1px solid var(--border-strong);border-radius:var(--r-sm);font-family:var(--sans);color:var(--text);background:#fff;outline:none;flex:1;transition:border .12s}
+.add-user-row .fi-sm:focus{border-color:var(--tp-crimson)}
+.location-toggle{display:flex;border:1px solid var(--border-strong);border-radius:var(--r-sm);overflow:hidden;flex-shrink:0}
+.location-toggle button{padding:7px 11px;border:none;background:#fff;font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;color:var(--text-2);transition:all .12s}
+.location-toggle button.sel{background:var(--tp-crimson);color:#fff}
+.add-user-btn{padding:7px 14px;background:var(--tp-crimson);color:#fff;border:none;border-radius:var(--r-sm);font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .12s;flex-shrink:0}
+.add-user-btn:hover{background:var(--tp-crimson-dark)}
 
-/* UPLOAD */
-.upload-zone{border:1.5px dashed var(--border-strong);border-radius:var(--r);padding:22px;text-align:center;cursor:pointer;transition:all .13s;color:var(--text-2);}
-.upload-zone:hover{border-color:var(--accent);background:var(--accent-2);color:var(--accent-text)}
-.upload-zone svg{width:28px;height:28px;stroke-width:1.5;display:block;margin:0 auto 6px}
+/* ── UPLOAD ──────────────────────────────────────────────── */
+.upload-zone{border:1.5px dashed var(--border-strong);border-radius:var(--r);padding:22px;text-align:center;cursor:pointer;transition:all .13s;color:var(--text-2)}
+.upload-zone:hover{border-color:var(--tp-crimson);background:var(--tp-crimson-light);color:var(--tp-crimson)}
+.upload-zone svg{width:26px;height:26px;stroke-width:1.5;display:block;margin:0 auto 6px}
 .upload-zone p{font-size:13px}
 .upload-zone small{font-size:11px;color:var(--text-3)}
 
-/* ACK BOX */
-.ack-box{border:1px solid #FCD34D;background:var(--amber-bg);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;margin-top:14px;}
+/* ── ACK BOX ─────────────────────────────────────────────── */
+.ack-box{border:1px solid #FCD34D;background:var(--amber-bg);border-radius:var(--r);padding:13px 16px;display:flex;gap:12px;align-items:flex-start;margin-top:14px}
 .ack-box.ok{border-color:#4ADE80;background:var(--green-bg)}
-.ack-box svg{width:18px;height:18px;stroke-width:2;flex-shrink:0;stroke:#D97706;margin-top:1px}
+.ack-box svg{width:17px;height:17px;stroke-width:2;flex-shrink:0;stroke:#D97706;margin-top:1px}
 .ack-box.ok svg{stroke:#16A34A}
-.ack-body{flex:1;font-size:13px;color:var(--amber);line-height:1.5}
+.ack-body{flex:1;font-size:12.5px;color:var(--amber);line-height:1.5}
 .ack-box.ok .ack-body{color:var(--green)}
 .ack-check-row{display:flex;align-items:center;gap:8px;margin-top:7px;cursor:pointer}
-.ack-check-row input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer}
-.ack-check-row label{font-size:13px;font-weight:500;cursor:pointer}
+.ack-check-row input{width:14px;height:14px;accent-color:var(--tp-crimson);cursor:pointer}
+.ack-check-row label{font-size:12.5px;font-weight:500;cursor:pointer}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:var(--r-sm);font-family:var(--sans);font-size:13.5px;font-weight:500;cursor:pointer;border:none;transition:all .13s;}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:#0A3A8A}
-.btn-primary:disabled{background:var(--border-strong);cursor:not-allowed}
-.btn-ghost{background:none;border:1px solid var(--border);color:var(--text-2)}
-.btn-ghost:hover{background:var(--bg);color:var(--text)}
-.btn-sm{padding:5px 12px;font-size:12.5px}
-.btn-red{background:var(--red-bg);color:var(--red);border:1px solid #FECACA}
-.btn-red:hover{background:#FEE2E2}
+/* ── BUTTONS ─────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:var(--r-sm);font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .12s}
+.btn-primary{background:var(--tp-crimson);color:#fff}
+.btn-primary:hover{background:var(--tp-crimson-dark)}
+.btn-primary:disabled{background:#ccc;cursor:not-allowed}
+.btn-ghost{background:none;border:1px solid var(--border-strong);color:var(--text-2)}
+.btn-ghost:hover{background:var(--surface2);color:var(--text)}
+.btn-sm{padding:5px 12px;font-size:12px}
 .row-btns{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
 
-/* TICKET DETAIL MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(10,10,12,.45);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+/* ── MODALS ──────────────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border-radius:14px;width:580px;max-width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.14);transform:scale(.96) translateY(6px);transition:transform .2s;}
+.modal{background:#fff;border-radius:10px;width:580px;max-width:92vw;max-height:86vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.18);transform:scale(.96) translateY(6px);transition:transform .18s}
 .modal-overlay.open .modal{transform:scale(1) translateY(0)}
-.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:1;}
-.modal-title{font-size:16px;font-weight:600;margin-bottom:3px}
-.modal-sub{font-size:12.5px;color:var(--text-2)}
-.modal-close{width:28px;height:28px;border-radius:6px;border:none;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0;font-size:16px;line-height:1;transition:background .12s;}
+.modal-header{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+/* TP crimson top border on modal */
+.modal-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--tp-crimson);border-radius:10px 10px 0 0}
+.modal-title{font-size:15px;font-weight:700;margin-bottom:3px;color:var(--text)}
+.modal-sub{font-size:12px;color:var(--text-3)}
+.modal-close{width:28px;height:28px;border-radius:5px;border:none;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0;font-size:15px;transition:background .12s}
 .modal-close:hover{background:var(--border)}
-.modal-body{padding:20px 24px}
-.modal-section-label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:block}
-
-/* ISSUE DETAIL MODAL */
-.issue-modal-banner{background:var(--orange-bg);border:1px solid #FDBA74;border-radius:var(--r-sm);padding:12px 14px;margin-bottom:18px;font-size:13px;color:var(--orange);line-height:1.5;}
-.affected-users-list{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
-.affected-user-pill{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);}
-.affected-user-pill span{flex:1;font-size:13px;font-family:var(--mono);}
-.add-impacted-row{display:flex;gap:8px;align-items:center;margin-top:10px;}
-
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
-.detail-field label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px}
-.detail-field p{font-size:13.5px;color:var(--text)}
-.detail-desc{margin-bottom:18px}
-.detail-desc label{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px}
-.detail-desc p{font-size:13.5px;color:var(--text);line-height:1.6;background:var(--bg);border-radius:var(--r-sm);padding:12px;border:1px solid var(--border)}
-
-.timeline{border-left:2px solid var(--border);padding-left:18px;margin-left:6px;margin-top:6px}
-.tl-item{position:relative;margin-bottom:16px}
+.modal-body{padding:18px 22px}
+.modal-section-label{font-size:10.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:block}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.detail-field label{font-size:10.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px}
+.detail-field p{font-size:13px;color:var(--text)}
+.detail-desc{margin-bottom:16px}
+.detail-desc label{font-size:10.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.detail-desc p{font-size:13px;color:var(--text);line-height:1.6;background:var(--surface2);border-radius:var(--r-sm);padding:11px;border:1px solid var(--border)}
+.timeline{border-left:2px solid var(--border);padding-left:16px;margin-left:5px}
+.tl-item{position:relative;margin-bottom:14px}
 .tl-item:last-child{margin-bottom:0}
-.tl-dot{position:absolute;left:-25px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--border-strong);}
-.tl-dot.active{border-color:var(--accent);background:var(--accent)}
-.tl-dot.done{border-color:#22c55e;background:#22c55e}
-.tl-time{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-bottom:2px}
-.tl-msg{font-size:13px;color:var(--text);line-height:1.45}
-.tl-by{font-size:11.5px;color:var(--text-2);margin-top:1px}
+.tl-dot{position:absolute;left:-21px;top:3px;width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid var(--border-strong)}
+.tl-dot.active{border-color:var(--tp-crimson);background:var(--tp-crimson)}
+.tl-dot.done{border-color:var(--green);background:var(--green)}
+.tl-time{font-size:10.5px;color:var(--text-3);font-family:var(--mono);margin-bottom:2px}
+.tl-msg{font-size:13px;color:var(--text);line-height:1.4}
+.tl-by{font-size:11px;color:var(--text-2);margin-top:1px}
 
-/* SUCCESS */
-.success-screen{text-align:center;padding:40px 20px}
-.success-icon{width:60px;height:60px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
-.success-icon svg{width:28px;height:28px;stroke:#16A34A;stroke-width:2}
-.success-ticket-num{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--accent);margin:12px 0}
+/* Issue modal */
+.issue-modal-banner{background:var(--orange-bg);border:1px solid #FDBA74;border-radius:var(--r-sm);padding:11px 14px;margin-bottom:16px;font-size:12.5px;color:var(--orange);line-height:1.5}
+.affected-users-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.affected-user-pill{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm)}
+.affected-user-pill span{flex:1;font-size:12.5px;font-family:var(--mono)}
+.add-impacted-row{display:flex;gap:8px;align-items:center;margin-top:10px}
 
-/* TOAST */
-.toast{position:fixed;bottom:22px;right:22px;background:var(--text);color:#fff;padding:11px 18px;border-radius:var(--r);font-size:13.5px;font-weight:500;display:flex;align-items:center;gap:9px;z-index:400;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;}
+/* ── SUCCESS SCREEN ──────────────────────────────────────── */
+.success-screen{text-align:center;padding:36px 20px}
+.success-icon{width:58px;height:58px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.success-icon svg{width:26px;height:26px;stroke:var(--green);stroke-width:2.2}
+.success-ticket-num{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--tp-crimson);margin:12px 0}
+
+/* ── TOAST ───────────────────────────────────────────────── */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--text);color:#fff;padding:10px 18px;border-radius:var(--r);font-size:13px;font-weight:500;display:flex;align-items:center;gap:9px;z-index:500;opacity:0;transform:translateY(8px);transition:all .22s;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.ok{background:#15803D}
 .toast.err{background:#DC2626}
 
-/* BACK BTN */
-.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans);margin-bottom:16px;transition:color .12s;}
-.back-btn:hover{color:var(--text)}
-.back-btn svg{width:14px;height:14px;stroke-width:2}
+/* ── BACK BTN ────────────────────────────────────────────── */
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-2);background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans);margin-bottom:14px;transition:color .12s}
+.back-btn:hover{color:var(--tp-crimson)}
+.back-btn svg{width:13px;height:13px;stroke-width:2.2}
+
+/* ── SCROLLBAR ───────────────────────────────────────────── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:99px}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="brand">
-    <div class="brand-dot">SA</div>
-    <span>Site Admin Portal</span>
-    <div class="brand-sep"></div>
-    <span class="brand-sub">Microsoft Project</span>
+<!-- ══ TOP BAR ══════════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">SA</div>
+    <div class="topbar-divider"></div>
+    <span class="topbar-title">Site Admin Portal</span>
+    <div class="topbar-divider"></div>
+    <span class="topbar-subtitle">Microsoft Project</span>
   </div>
-  <div class="header-user">
-    <div class="avatar">JM</div>
-    João Martins
+  <div class="topbar-right">
+    <button class="topbar-link">My Requests</button>
+    <button class="topbar-link">Knowledge</button>
+    <button class="topbar-link" onclick="nav('new-ticket',null)" style="background:var(--tp-crimson);color:#fff;padding:5px 14px;border-radius:4px;font-weight:600">+ New Request</button>
   </div>
-</header>
+</div>
+<div class="accent-bar"></div>
 
 <div class="layout">
 
+<!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
 <nav class="sidebar">
-  <div class="nav-section-label">Menu</div>
-  <button class="nav-item active" onclick="nav('home',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
-    Home
-  </button>
-  <button class="nav-item" onclick="nav('issues',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    Ongoing Issues
-    <span class="nav-badge" id="issues-count-badge">2</span>
-  </button>
-  <button class="nav-item" onclick="nav('tickets',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
-    My Requests
-  </button>
-  <button class="nav-item" onclick="nav('kb',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-    Knowledge Base
-  </button>
-  <div class="nav-sep"></div>
-  <button class="nav-item" onclick="nav('new-ticket',this)" style="color:var(--accent);font-weight:500">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke:var(--accent)"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-    New Request
-  </button>
+  <div class="sidebar-user">
+    <div class="sidebar-avatar-wrap">
+      <div class="sidebar-avatar">JM</div>
+      <div class="sidebar-avatar-ring"></div>
+    </div>
+    <div class="sidebar-username">João Martins</div>
+    <div class="sidebar-role">Microsoft Project · Operations</div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-section-label">Menu</div>
+    <button class="nav-item active" onclick="navClick('home',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
+      Home
+    </button>
+    <button class="nav-item" onclick="navClick('issues',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Ongoing Issues
+      <span class="nav-badge" id="issues-count-badge">2</span>
+    </button>
+    <button class="nav-item" onclick="navClick('tickets',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
+      My Requests
+    </button>
+    <button class="nav-item" onclick="navClick('kb',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      Knowledge Base
+    </button>
+    <div class="nav-sep"></div>
+    <button class="nav-item nav-item-new" onclick="navClick('new-ticket',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+      New Request
+    </button>
+  </div>
 </nav>
 
+<!-- ══ MAIN ══════════════════════════════════════════════════ -->
 <main>
 
-<!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
+<!-- ════ HOME ════════════════════════════════════════════════ -->
 <div id="page-home" class="page active">
-  <div class="welcome-banner">
-    <div class="welcome-banner-icon">👋</div>
-    <div class="welcome-banner-text">
-      <h2>Welcome, João</h2>
-      <p>This portal centralises all support for the Microsoft project — from troubleshooting guides to request tracking. Use the menu on the left to navigate.</p>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-greeting">Site Admin Portal · Microsoft Project</div>
+    <div class="hero-title">Welcome back, João 👋</div>
+    <div class="hero-sub">This portal centralises all support for the Microsoft project — troubleshooting guides, request tracking and incident updates, all in one place.</div>
+    <div class="hero-alert" id="home-issue-banner" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line stroke="currentColor" stroke-width="2" x1="12" y1="9" x2="12" y2="13"/><line stroke="currentColor" stroke-width="2" x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div id="home-issue-banner-text"></div>
     </div>
   </div>
 
-  <!-- Active issues banner (shown when there are active issues) -->
-  <div class="issue-banner" id="home-issue-banner">
-    <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line stroke="currentColor" stroke-width="2" x1="12" y1="9" x2="12" y2="13"/><line stroke="currentColor" stroke-width="2" x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <div class="issue-banner-text" id="home-issue-banner-text"></div>
-  </div>
-
-  <div class="quick-grid">
-    <div class="quick-card" onclick="nav('new-ticket', document.querySelector('.nav-item:nth-child(6)'))">
-      <div class="quick-card-icon" style="background:#EFF6FF">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+  <div class="content-area">
+    <div class="quick-grid">
+      <div class="quick-card" onclick="navClick('new-ticket',null)">
+        <div class="quick-card-icon" style="background:#FEE7F2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C8006E" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <div class="quick-card-title">Open a New Request</div>
+        <div class="quick-card-desc">Report an issue with guided troubleshooting first.</div>
       </div>
-      <div class="quick-card-title">Open a New Request</div>
-      <div class="quick-card-desc">Report an issue with guided troubleshooting first.</div>
-    </div>
-    <div class="quick-card" onclick="nav('issues', document.querySelector('.nav-item:nth-child(2)'))">
-      <div class="quick-card-icon" style="background:#FFF7ED">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div class="quick-card" onclick="navClick('issues',null)">
+        <div class="quick-card-icon" style="background:#FFF7ED">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="quick-card-title">Ongoing Issues</div>
+        <div class="quick-card-desc">View active outages and add yourself as impacted.</div>
       </div>
-      <div class="quick-card-title">Ongoing Issues</div>
-      <div class="quick-card-desc">View active outages and add yourself as impacted.</div>
-    </div>
-    <div class="quick-card" onclick="nav('tickets', document.querySelector('.nav-item:nth-child(3)'))">
-      <div class="quick-card-icon" style="background:#F0FDF4">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
+      <div class="quick-card" onclick="navClick('tickets',null)">
+        <div class="quick-card-icon" style="background:#F0FDF4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
+        </div>
+        <div class="quick-card-title">My Requests</div>
+        <div class="quick-card-desc">Track open requests and view closed ticket history.</div>
       </div>
-      <div class="quick-card-title">My Requests</div>
-      <div class="quick-card-desc">Track open requests and view closed ticket history.</div>
-    </div>
-    <div class="quick-card" onclick="nav('kb', document.querySelector('.nav-item:nth-child(4)'))">
-      <div class="quick-card-icon" style="background:#FEF9EC">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      <div class="quick-card" onclick="navClick('kb',null)">
+        <div class="quick-card-icon" style="background:#FEF9EC">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <div class="quick-card-title">Knowledge Base</div>
+        <div class="quick-card-desc">Self-service guides — resolve issues without a ticket.</div>
       </div>
-      <div class="quick-card-title">Knowledge Base</div>
-      <div class="quick-card-desc">Self-service guides — resolve issues without a ticket.</div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Recent activity</div>
-    <div class="tickets-list" id="home-tickets"></div>
+    <div class="card">
+      <div class="card-title">Recent activity</div>
+      <div class="tickets-list" id="home-tickets"></div>
+    </div>
   </div>
 </div>
 
-<!-- ════════════════════════════ ONGOING ISSUES ════════════════════════ -->
+<!-- ════ ONGOING ISSUES ══════════════════════════════════════ -->
 <div id="page-issues" class="page">
-  <div class="page-head">
-    <div class="page-title">Ongoing Issues</div>
-    <div class="page-sub">Active outages and known issues affecting the Microsoft project. Click any issue to view details or add yourself as impacted.</div>
+  <div class="hero" style="padding:24px 36px 20px">
+    <div class="hero-greeting">Site Admin Portal</div>
+    <div class="hero-title">Ongoing Issues</div>
+    <div class="hero-sub">Active outages and known issues affecting the Microsoft project. Click any issue to view details or report yourself as impacted.</div>
   </div>
-  <div class="card" style="padding:0">
-    <div id="issues-list"></div>
+  <div class="content-area">
+    <div class="card" style="padding:0"><div id="issues-list"></div></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════ MY REQUESTS ════════════════════════ -->
+<!-- ════ MY REQUESTS ═════════════════════════════════════════ -->
 <div id="page-tickets" class="page">
-  <div class="page-head">
-    <div class="page-title">My Requests</div>
-    <div class="page-sub">All requests you have submitted. Click any row to view details.</div>
+  <div class="hero" style="padding:24px 36px 20px">
+    <div class="hero-greeting">Site Admin Portal</div>
+    <div class="hero-title">My Requests</div>
+    <div class="hero-sub">All requests you have submitted. Click any row to view full details and activity timeline.</div>
   </div>
-  <div class="card" style="padding:0">
-    <div class="tickets-list" id="all-tickets"></div>
+  <div class="content-area">
+    <div class="card" style="padding:0"><div class="tickets-list" id="all-tickets"></div></div>
   </div>
 </div>
 
-<!-- ════════════════════════════ KNOWLEDGE BASE ════════════════════════ -->
+<!-- ════ KNOWLEDGE BASE ══════════════════════════════════════ -->
 <div id="page-kb" class="page">
   <div id="kb-home-view">
-    <div class="page-head">
-      <div class="page-title">Knowledge Base</div>
-      <div class="page-sub">Step-by-step troubleshooting guides. Resolve most issues yourself before raising a request.</div>
+    <div class="hero" style="padding:24px 36px 20px">
+      <div class="hero-greeting">Site Admin Portal</div>
+      <div class="hero-title">Knowledge Base</div>
+      <div class="hero-sub">Step-by-step troubleshooting guides. Resolve most issues yourself before raising a request.</div>
     </div>
-    <div class="kb-grid">
-      <div class="kb-card" onclick="openKB('login')">
-        <div class="kb-card-top"><div class="kb-icon" style="background:#EFF6FF"><svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="kb-title">Login & Authentication</div></div>
-        <div class="kb-desc">VPN, MFA, SSO, password resets, account lockouts and access issues.</div>
-        <div class="kb-count">8 guides</div>
-      </div>
-      <div class="kb-card" onclick="openKB('yubikey')">
-        <div class="kb-card-top"><div class="kb-icon" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="kb-title">YubiKey</div></div>
-        <div class="kb-desc">Setup, registration, lost or broken keys, and re-provisioning procedures.</div>
-        <div class="kb-count">5 guides</div>
-      </div>
-      <div class="kb-card" onclick="openKB('tools')">
-        <div class="kb-card-top"><div class="kb-icon" style="background:#F5F3FF"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="kb-title">Tools & Software</div></div>
-        <div class="kb-desc">Teams, Outlook, SharePoint, Azure Portal and other client tool issues.</div>
-        <div class="kb-count">12 guides</div>
-      </div>
-      <div class="kb-card" onclick="openKB('computer')">
-        <div class="kb-card-top"><div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="kb-title">Computer & Hardware</div></div>
-        <div class="kb-desc">Updates, drivers, performance issues and peripheral troubleshooting.</div>
-        <div class="kb-count">6 guides</div>
-      </div>
-      <div class="kb-card" onclick="openKB('newhire')">
-        <div class="kb-card-top"><div class="kb-icon" style="background:#FDF2F8"><svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="kb-title">New-hire Onboarding</div></div>
-        <div class="kb-desc">Wave registration, account provisioning and equipment assignment checklists.</div>
-        <div class="kb-count">9 guides</div>
-      </div>
-      <div class="kb-card" onclick="openKB('locker')">
-        <div class="kb-card-top"><div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="2"/><path d="M12 12v-4"/></svg></div><div class="kb-title">Lockers</div></div>
-        <div class="kb-desc">Assignment requests, access codes, malfunctions and floor coordination.</div>
-        <div class="kb-count">3 guides</div>
+    <div class="content-area">
+      <div class="kb-grid">
+        <div class="kb-card" onclick="openKB('login')">
+          <div class="kb-card-top"><div class="kb-icon" style="background:#EFF6FF"><svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="kb-title">Login & Authentication</div></div>
+          <div class="kb-desc">VPN, MFA, SSO, password resets, account lockouts and access issues.</div>
+          <div class="kb-count">8 guides</div>
+        </div>
+        <div class="kb-card" onclick="openKB('yubikey')">
+          <div class="kb-card-top"><div class="kb-icon" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="kb-title">YubiKey</div></div>
+          <div class="kb-desc">Setup, registration, lost or broken keys, and re-provisioning procedures.</div>
+          <div class="kb-count">5 guides</div>
+        </div>
+        <div class="kb-card" onclick="openKB('tools')">
+          <div class="kb-card-top"><div class="kb-icon" style="background:#F5F3FF"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="kb-title">Tools & Software</div></div>
+          <div class="kb-desc">Teams, Outlook, SharePoint, Azure Portal and other client tool issues.</div>
+          <div class="kb-count">12 guides</div>
+        </div>
+        <div class="kb-card" onclick="openKB('computer')">
+          <div class="kb-card-top"><div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="kb-title">Computer & Hardware</div></div>
+          <div class="kb-desc">Updates, drivers, performance issues and peripheral troubleshooting.</div>
+          <div class="kb-count">6 guides</div>
+        </div>
+        <div class="kb-card" onclick="openKB('newhire')">
+          <div class="kb-card-top"><div class="kb-icon" style="background:#FDF2F8"><svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="kb-title">New-hire Onboarding</div></div>
+          <div class="kb-desc">Wave registration, account provisioning and equipment assignment checklists.</div>
+          <div class="kb-count">9 guides</div>
+        </div>
+        <div class="kb-card" onclick="openKB('locker')">
+          <div class="kb-card-top"><div class="kb-icon" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="2"/><path d="M12 12v-4"/></svg></div><div class="kb-title">Lockers</div></div>
+          <div class="kb-desc">Assignment requests, access codes, malfunctions and floor coordination.</div>
+          <div class="kb-count">3 guides</div>
+        </div>
       </div>
     </div>
   </div>
   <div id="kb-article-view" style="display:none">
-    <button class="back-btn" onclick="closeKBArticle()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Back to Knowledge Base
-    </button>
-    <div class="card">
-      <div id="kb-article-title" class="card-title" style="font-size:16px;margin-bottom:4px"></div>
-      <div id="kb-article-desc" style="font-size:13px;color:var(--text-2);margin-bottom:14px;line-height:1.5"></div>
-      <div class="article-steps" id="kb-article-steps"></div>
-      <div id="kb-ack-area" style="display:none;margin-top:4px">
-        <div class="ack-box" id="kb-ack-box">
-          <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
-          <div class="ack-body">
-            <strong>Still not resolved?</strong> If you have followed all steps and the issue persists, you can open a request for the Site Admin team.
-            <div class="ack-check-row">
-              <input type="checkbox" id="kb-ack-cb" onchange="handleKBAck(this)">
-              <label for="kb-ack-cb">I have followed all steps and the issue is not resolved.</label>
+    <div class="hero" style="padding:24px 36px 20px">
+      <button class="back-btn" onclick="closeKBArticle()" style="color:rgba(255,255,255,.7);margin-bottom:10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Knowledge Base
+      </button>
+      <div class="hero-title" id="kb-article-title" style="font-size:20px"></div>
+      <div class="hero-sub" id="kb-article-desc"></div>
+    </div>
+    <div class="content-area">
+      <div class="card">
+        <div class="article-steps" id="kb-article-steps"></div>
+        <div id="kb-ack-area" style="display:none;margin-top:4px">
+          <div class="ack-box" id="kb-ack-box">
+            <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+            <div class="ack-body">
+              <strong>Still not resolved?</strong> If you have followed all steps and the issue persists, you can open a request for the Site Admin team.
+              <div class="ack-check-row">
+                <input type="checkbox" id="kb-ack-cb" onchange="handleKBAck(this)">
+                <label for="kb-ack-cb">I have followed all steps and the issue is not resolved.</label>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="kb-open-ticket-btn" style="display:none;margin-top:12px">
-          <button class="btn btn-primary" onclick="goToNewTicketFromKB()">Open a Support Request →</button>
+          <div id="kb-open-ticket-btn" style="display:none;margin-top:12px">
+            <button class="btn btn-primary" onclick="goToNewTicketFromKB()">Open a Support Request →</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════ NEW REQUEST FLOW ═══════════════════════ -->
+<!-- ════ NEW REQUEST ═════════════════════════════════════════ -->
 <div id="page-new-ticket" class="page">
-  <div class="page-head">
-    <div class="page-title">New Support Request</div>
-    <div class="page-sub">Troubleshooting confirmation is required before a ticket is created.</div>
+  <div class="hero" style="padding:24px 36px 20px">
+    <div class="hero-greeting">Site Admin Portal</div>
+    <div class="hero-title">New Support Request</div>
+    <div class="hero-sub">Troubleshooting confirmation is required before a ticket is created.</div>
   </div>
+  <div class="content-area">
 
   <!-- STEP 1 -->
   <div id="nt-step1">
@@ -509,7 +667,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
           <div class="type-card-label">Lockers</div>
         </div>
         <div class="type-card" onclick="selectType(this,'tools')">
-          <div class="type-card-icon" style="background:#F5F5F4"><svg viewBox="0 0 24 24" fill="none" stroke="#6B6863" stroke-width="1.8"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+          <div class="type-card-icon" style="background:#F5F5F5"><svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
           <div class="type-card-label">Other</div>
         </div>
       </div>
@@ -553,7 +711,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     </div>
   </div>
 
-  <!-- STEP 3: Form -->
+  <!-- STEP 3 -->
   <div id="nt-step3" style="display:none">
     <div class="flow-bar">
       <div class="fl-step"><div class="fl-num ok">✓</div><span class="fl-label">Issue type</span></div>
@@ -565,14 +723,11 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
       <div class="fl-step"><div class="fl-num">4</div><span class="fl-label">Confirmation</span></div>
     </div>
     <div class="card">
-      <div class="card-title">Request details <span id="form-type-badge" class="badge b-blue" style="font-size:11.5px;margin-left:8px"></span></div>
-
+      <div class="card-title">Request details <span id="form-type-badge" class="badge b-crimson" style="font-size:11px;margin-left:8px;vertical-align:middle"></span></div>
       <div class="fg">
         <label class="fl">Issue description <span class="req">*</span></label>
         <textarea class="fi" id="f-desc" placeholder="Describe what is happening and what you expected. Include any error messages."></textarea>
       </div>
-
-      <!-- Primary affected user (required) -->
       <div class="form-row">
         <div class="fg">
           <label class="fl">Primary user account affected <span class="req">*</span></label>
@@ -587,15 +742,11 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
           </select>
         </div>
       </div>
-
-      <!-- Additional impacted users -->
       <div class="fg">
         <label class="fl">Additional impacted users <span class="opt">(if more than one)</span></label>
         <div class="users-box">
           <div class="users-box-header">Impacted users list</div>
-          <div id="impacted-users-list">
-            <div style="padding:14px 16px;font-size:13px;color:var(--text-3);text-align:center">No additional users added yet.</div>
-          </div>
+          <div id="impacted-users-list"><div style="padding:13px 16px;font-size:12.5px;color:var(--text-3);text-align:center">No additional users added yet.</div></div>
           <div class="add-user-row">
             <input class="fi-sm" id="new-user-email" placeholder="user@contoso.com" onkeydown="if(event.key==='Enter')addImpactedUser()">
             <div class="location-toggle">
@@ -605,9 +756,8 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
             <button class="add-user-btn" onclick="addImpactedUser()">+ Add user</button>
           </div>
         </div>
-        <div class="hint">Add each impacted user individually and indicate whether they are working from the office or remotely.</div>
+        <div class="hint">Add each impacted user individually and indicate their working location.</div>
       </div>
-
       <div class="fg">
         <label class="fl">Working user sample <span class="opt">(if applicable)</span></label>
         <input class="fi" id="f-sample" placeholder="colleague@contoso.com">
@@ -636,14 +786,14 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
       <div class="row-btns">
         <button class="btn btn-ghost" onclick="toStep2()">← Back</button>
         <button class="btn btn-primary" onclick="submitTicket()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:15px;height:15px;stroke-width:2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:14px;height:14px;stroke-width:2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           Submit to Site Admin Team
         </button>
       </div>
     </div>
   </div>
 
-  <!-- STEP 4: Done -->
+  <!-- STEP 4 -->
   <div id="nt-step4" style="display:none">
     <div class="flow-bar">
       <div class="fl-step"><div class="fl-num ok">✓</div><span class="fl-label">Issue type</span></div>
@@ -656,26 +806,26 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     </div>
     <div class="card">
       <div class="success-screen">
-        <div class="success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <h2 style="font-size:18px;font-weight:600;margin-bottom:6px">Request submitted!</h2>
-        <p style="color:var(--text-2);font-size:13.5px;margin-bottom:4px">Your request has been received by the Site Admin team.</p>
+        <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h2 style="font-size:18px;font-weight:700;margin-bottom:6px">Request submitted!</h2>
+        <p style="color:var(--text-2);font-size:13px;margin-bottom:4px">Your request has been received by the Site Admin team.</p>
         <div class="success-ticket-num" id="done-ticket-num">#SA-0144</div>
-        <p style="color:var(--text-2);font-size:13px;margin-bottom:24px">Expected first response: <strong>2–4 hours</strong>. You can track progress in <em>My Requests</em>.</p>
+        <p style="color:var(--text-2);font-size:13px;margin-bottom:22px">Expected first response: <strong>2–4 hours</strong>. Track progress in <em>My Requests</em>.</p>
         <div style="display:flex;gap:10px;justify-content:center">
-          <button class="btn btn-ghost" onclick="nav('tickets', document.querySelector('.nav-item:nth-child(3)'))">View My Requests</button>
+          <button class="btn btn-ghost" onclick="navClick('tickets',null)">View My Requests</button>
           <button class="btn btn-primary" onclick="resetFlow()">Submit another →</button>
         </div>
       </div>
     </div>
   </div>
+
+  </div><!-- /content-area -->
 </div>
 
 </main>
 </div>
 
-<!-- ══════════════════ TICKET DETAIL MODAL ══════════════════ -->
+<!-- ══ TICKET DETAIL MODAL ══════════════════════════════════ -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-header">
@@ -687,11 +837,8 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     </div>
     <div class="modal-body">
       <div class="detail-grid" id="m-grid"></div>
-      <div class="detail-desc">
-        <label>Description</label>
-        <p id="m-desc"></p>
-      </div>
-      <div id="m-users-section" style="display:none;margin-bottom:18px">
+      <div class="detail-desc"><label>Description</label><p id="m-desc"></p></div>
+      <div id="m-users-section" style="display:none;margin-bottom:16px">
         <span class="modal-section-label">Impacted users</span>
         <div id="m-users-list" class="affected-users-list"></div>
       </div>
@@ -701,7 +848,7 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
   </div>
 </div>
 
-<!-- ══════════════════ ONGOING ISSUE DETAIL MODAL ══════════════════ -->
+<!-- ══ ISSUE DETAIL MODAL ══════════════════════════════════ -->
 <div class="modal-overlay" id="issue-modal-overlay" onclick="closeIssueModal(event)">
   <div class="modal">
     <div class="modal-header">
@@ -714,21 +861,18 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
     <div class="modal-body">
       <div id="im-banner" class="issue-modal-banner"></div>
       <div class="detail-grid" id="im-grid"></div>
-      <div class="detail-desc">
-        <label>Description</label>
-        <p id="im-desc"></p>
-      </div>
+      <div class="detail-desc"><label>Description</label><p id="im-desc"></p></div>
       <span class="modal-section-label">Impacted users (<span id="im-user-count">0</span>)</span>
       <div class="affected-users-list" id="im-users-list"></div>
       <div class="add-impacted-row">
-        <input class="fi-sm" id="im-new-user" placeholder="Add your account (user@contoso.com)" style="flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--sans);font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')addImpactedToIssue()">
+        <input class="fi-sm" id="im-new-user" placeholder="Add your account (user@contoso.com)" style="flex:1;padding:7px 10px;border:1px solid var(--border-strong);border-radius:var(--r-sm);font-family:var(--sans);font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')addImpactedToIssue()">
         <div class="location-toggle">
           <button id="im-loc-office" onclick="setIssueLoc('office')" class="sel">Office</button>
           <button id="im-loc-remote" onclick="setIssueLoc('remote')">Remote</button>
         </div>
         <button class="add-user-btn" onclick="addImpactedToIssue()">+ Add me</button>
       </div>
-      <span class="modal-section-label" style="display:block;margin-top:18px">Updates</span>
+      <span class="modal-section-label" style="display:block;margin-top:16px">Updates</span>
       <div class="timeline" id="im-timeline"></div>
     </div>
   </div>
@@ -737,159 +881,78 @@ textarea.fi{resize:vertical;min-height:88px;line-height:1.5}
 <div class="toast" id="toast-el"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════
-const tickets = [
-  {id:'#SA-0143',title:'VPN keeps disconnecting after 10 minutes',type:'Login / Account',priority:'Medium',status:'open',submitted:'Just now',desc:'After connecting to GlobalProtect, the VPN drops every 10 minutes approximately. I have tried reconnecting but it happens consistently.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'}],timeline:[
-    {dot:'active',time:'Today 09:14',msg:'Request submitted via portal.',by:'You'},
-    {dot:'',time:'Today 09:14',msg:'Awaiting assignment to Site Admin team member.',by:'System'}
-  ]},
-  {id:'#SA-0141',title:'YubiKey not recognised on login',type:'YubiKey',priority:'Medium',status:'progress',submitted:'5h ago',desc:'Inserted YubiKey into USB-A port on laptop dock. The login page does not prompt for the key and shows "authentication method not available". Tried different USB ports.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'ana.silva@contoso.com',location:'remote'}],timeline:[
-    {dot:'done',time:'Today 06:50',msg:'Request submitted.',by:'You'},
-    {dot:'done',time:'Today 07:15',msg:'Assigned to Sara Mendes (Site Admin).',by:'System'},
-    {dot:'active',time:'Today 08:30',msg:'Sara is investigating — driver reinstall in progress on your machine.',by:'Sara M. · Site Admin'}
-  ]},
-  {id:'#SA-0139',title:'Locker assignment — floor 3',type:'Lockers',priority:'Low',status:'resolved',submitted:'2 days ago',desc:'New hire starting Monday needs a locker on floor 3. Please assign and send access code to their email before Friday.',impactedUsers:[],timeline:[
-    {dot:'done',time:'Mon 14:02',msg:'Request submitted.',by:'You'},
-    {dot:'done',time:'Mon 15:30',msg:'Locker 3-018 assigned. Code sent to new hire.',by:'Rui C. · Site Admin'},
-    {dot:'done',time:'Mon 15:31',msg:'Request closed.',by:'System'}
-  ]},
-  {id:'#SA-0138',title:'Microsoft Teams video not loading',type:'Tools / Software',priority:'High',status:'resolved',submitted:'3 days ago',desc:'Video calls show black screen for all participants. Audio works. Happens in both desktop app and browser version.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'carla.neto@contoso.com',location:'office'},{email:'tiago.reis@contoso.com',location:'remote'}],timeline:[
-    {dot:'done',time:'Fri 09:11',msg:'Request submitted.',by:'You'},
-    {dot:'done',time:'Fri 09:45',msg:'Assigned to Pedro Alves (Site Admin).',by:'System'},
-    {dot:'done',time:'Fri 11:00',msg:'Issue traced to GPU driver conflict. Driver updated remotely.',by:'Pedro A. · Site Admin'},
-    {dot:'done',time:'Fri 11:20',msg:'Confirmed resolved by user. Ticket closed.',by:'System'}
-  ]},
+// ═══════════ DATA ═══════════════════════════════════════════
+const tickets=[
+  {id:'#SA-0143',title:'VPN keeps disconnecting after 10 minutes',type:'Login / Account',priority:'Medium',status:'open',submitted:'Just now',desc:'After connecting to GlobalProtect, the VPN drops every 10 minutes approximately. I have tried reconnecting but it happens consistently.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'}],timeline:[{dot:'active',time:'Today 09:14',msg:'Request submitted via portal.',by:'You'},{dot:'',time:'Today 09:14',msg:'Awaiting assignment to Site Admin team member.',by:'System'}]},
+  {id:'#SA-0141',title:'YubiKey not recognised on login',type:'YubiKey',priority:'Medium',status:'progress',submitted:'5h ago',desc:'Inserted YubiKey into USB-A port on laptop dock. The login page does not prompt for the key and shows "authentication method not available". Tried different USB ports.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'ana.silva@contoso.com',location:'remote'}],timeline:[{dot:'done',time:'Today 06:50',msg:'Request submitted.',by:'You'},{dot:'done',time:'Today 07:15',msg:'Assigned to Sara Mendes (Site Admin).',by:'System'},{dot:'active',time:'Today 08:30',msg:'Sara is investigating — driver reinstall in progress on your machine.',by:'Sara M. · Site Admin'}]},
+  {id:'#SA-0139',title:'Locker assignment — floor 3',type:'Lockers',priority:'Low',status:'resolved',submitted:'2 days ago',desc:'New hire starting Monday needs a locker on floor 3.',impactedUsers:[],timeline:[{dot:'done',time:'Mon 14:02',msg:'Request submitted.',by:'You'},{dot:'done',time:'Mon 15:30',msg:'Locker 3-018 assigned. Code sent to new hire.',by:'Rui C. · Site Admin'},{dot:'done',time:'Mon 15:31',msg:'Request closed.',by:'System'}]},
+  {id:'#SA-0138',title:'Microsoft Teams video not loading',type:'Tools / Software',priority:'High',status:'resolved',submitted:'3 days ago',desc:'Video calls show black screen for all participants. Audio works.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'carla.neto@contoso.com',location:'office'}],timeline:[{dot:'done',time:'Fri 09:11',msg:'Request submitted.',by:'You'},{dot:'done',time:'Fri 11:00',msg:'Issue traced to GPU driver conflict. Driver updated remotely.',by:'Pedro A. · Site Admin'},{dot:'done',time:'Fri 11:20',msg:'Confirmed resolved by user. Ticket closed.',by:'System'}]},
 ];
 
-const ongoingIssues = [
-  {
-    id:'ISS-007', severity:'critical',
-    title:'SharePoint Online — document library access errors',
-    category:'Tools / Software', started:'Today 08:20', eta:'Under investigation',
-    desc:'Multiple users are unable to open or edit documents in SharePoint Online. Access attempts return a 403 error. The issue appears to affect all document libraries. The Site Admin team is in contact with the Microsoft tenant support team.',
-    impactedUsers:[
-      {email:'pedro.alves@contoso.com',location:'office'},
-      {email:'margarida.costa@contoso.com',location:'remote'},
-      {email:'rui.carvalho@contoso.com',location:'office'},
-    ],
-    timeline:[
-      {dot:'done',time:'08:20',msg:'Issue first reported by operations.',by:'Auto-detect'},
-      {dot:'done',time:'08:35',msg:'Site Admin team confirmed the outage. Escalated to Microsoft Tenant Support.',by:'Sara M. · Site Admin'},
-      {dot:'active',time:'09:10',msg:'Investigation ongoing. Workaround: access files directly via OneDrive desktop app.',by:'Sara M. · Site Admin'},
-    ]
-  },
-  {
-    id:'ISS-006', severity:'warning',
-    title:'GlobalProtect VPN — intermittent disconnections',
-    category:'Login / Account', started:'Today 06:45', eta:'Fix expected 14:00',
-    desc:'Some users are experiencing VPN drops after 10–15 minutes of activity. The issue is linked to a gateway configuration change deployed this morning. A rollback is being prepared.',
-    impactedUsers:[
-      {email:'joao.martins@contoso.com',location:'office'},
-      {email:'ana.silva@contoso.com',location:'remote'},
-    ],
-    timeline:[
-      {dot:'done',time:'06:45',msg:'First reports received from remote users.',by:'Operations'},
-      {dot:'done',time:'07:30',msg:'Root cause identified: gateway config change from 06:00 deployment.',by:'Pedro A. · Site Admin'},
-      {dot:'active',time:'08:00',msg:'Rollback in progress. Estimated resolution by 14:00.',by:'Pedro A. · Site Admin'},
-    ]
-  }
+const ongoingIssues=[
+  {id:'ISS-007',severity:'critical',title:'SharePoint Online — document library access errors',category:'Tools / Software',started:'Today 08:20',eta:'Under investigation',desc:'Multiple users are unable to open or edit documents in SharePoint Online. Access attempts return a 403 error. The Site Admin team is in contact with Microsoft Tenant Support.',impactedUsers:[{email:'pedro.alves@contoso.com',location:'office'},{email:'margarida.costa@contoso.com',location:'remote'},{email:'rui.carvalho@contoso.com',location:'office'}],timeline:[{dot:'done',time:'08:20',msg:'Issue first reported by operations.',by:'Auto-detect'},{dot:'done',time:'08:35',msg:'Confirmed outage. Escalated to Microsoft Tenant Support.',by:'Sara M. · Site Admin'},{dot:'active',time:'09:10',msg:'Investigation ongoing. Workaround: access files directly via OneDrive desktop app.',by:'Sara M. · Site Admin'}]},
+  {id:'ISS-006',severity:'warning',title:'GlobalProtect VPN — intermittent disconnections',category:'Login / Account',started:'Today 06:45',eta:'Fix expected 14:00',desc:'Some users are experiencing VPN drops after 10–15 minutes of activity. The issue is linked to a gateway configuration change deployed this morning. A rollback is being prepared.',impactedUsers:[{email:'joao.martins@contoso.com',location:'office'},{email:'ana.silva@contoso.com',location:'remote'}],timeline:[{dot:'done',time:'06:45',msg:'First reports received from remote users.',by:'Operations'},{dot:'done',time:'07:30',msg:'Root cause identified: gateway config change from 06:00 deployment.',by:'Pedro A. · Site Admin'},{dot:'active',time:'08:00',msg:'Rollback in progress. Estimated resolution by 14:00.',by:'Pedro A. · Site Admin'}]},
 ];
 
-// ═══════════════════════════════════════════════════════════
-// KB DATA
-// ═══════════════════════════════════════════════════════════
-const kbData = {
-  login:{title:'Login & Authentication',desc:'Follow these steps before opening a request. Most login issues can be resolved without Site Admin intervention.',steps:[
-    {t:'Check your VPN connection',d:'Ensure GlobalProtect is connected. Disconnect and reconnect, or try switching VPN gateway in the app.'},
-    {t:'Clear browser cache & cookies',d:'In your browser, clear cache and cookies for the last 7 days. Close all windows and reopen.'},
-    {t:'Try incognito mode or a different browser',d:'Open an incognito window or switch between Edge and Chrome. Many SSO issues are caused by browser extensions.'},
-    {t:'Check your MFA / Authenticator app',d:'Ensure Microsoft Authenticator is up to date and your phone\'s time is correct. Wait for a fresh OTP code.'},
-    {t:'Self-service password reset',d:'Visit aka.ms/sspr to reset your password using your registered phone or backup email.'},
-  ]},
-  yubikey:{title:'YubiKey Troubleshooting',desc:'Work through these steps. Most YubiKey problems are port or registration related.',steps:[
-    {t:'Try a different USB port',d:'Remove the YubiKey and plug it directly into the laptop (not a hub). Try both USB-A and USB-C with an adapter.'},
-    {t:'Check YubiKey Manager is installed',d:'Open YubiKey Manager from Start. If missing, install it via the Software Center — do not use external downloads.'},
-    {t:'Re-register the YubiKey',d:'In your account security settings, remove and re-add the YubiKey following the YubiKey Registration Guide.'},
-    {t:'Test on a colleague\'s machine',d:'Try the key on another device to determine whether the issue is with the key or your machine.'},
-  ]},
-  tools:{title:'Tools & Software Troubleshooting',desc:'App issues are frequently fixed by re-authentication, updates or cache clearing.',steps:[
-    {t:'Sign out and back in',d:'Fully sign out of the affected application, close it completely from the taskbar, then sign in again.'},
-    {t:'Check for pending updates',d:'Go to Help > Check for updates inside the app, or open the Software Center and apply all pending updates.'},
-    {t:'Clear application cache',d:'For Teams: close the app, go to %appdata%\\Microsoft\\Teams, delete the Cache folder, then relaunch.'},
-    {t:'Repair via Software Center',d:'Open Software Center, find the application, click Repair. Do not use external installers.'},
-  ]},
-  computer:{title:'Computer & Hardware Troubleshooting',desc:'Hardware and OS issues often resolve with the steps below.',steps:[
-    {t:'Perform a full restart',d:'Click Start > Restart (not Shut Down). A full restart clears memory and applies pending updates.'},
-    {t:'Run Windows Update',d:'Go to Settings > Windows Update, check for updates, apply all available, and restart.'},
-    {t:'Run Disk Cleanup',d:'Search for "Disk Cleanup" in the Start menu, run on the C: drive, and clear temporary files.'},
-    {t:'Check cable and dock connections',d:'Disconnect and reconnect all cables from your docking station. Test directly from the laptop port.'},
-  ]},
-  newhire:{title:'New-hire Onboarding Checklist',desc:'Confirm each item below before raising a request.',steps:[
-    {t:'Verify wave registration',d:'Confirm the new hire was added to the wave spreadsheet at least 5 business days before their start date.'},
-    {t:'Confirm account provisioning request',d:'Check that the AD account form was submitted to IT and that a confirmation email was received.'},
-    {t:'Verify equipment assignment',d:'Confirm a laptop has been assigned and is ready for collection on day one.'},
-    {t:'Check YubiKey pre-provisioning',d:'YubiKeys for new hires must be pre-registered 48 hours before the start date. Confirm this in the YubiKey portal.'},
-  ]},
-  locker:{title:'Locker Management',desc:'Most locker issues are resolved through the portal before raising a request.',steps:[
-    {t:'Check your assignment in the Locker Portal',d:'Log in to the Locker Portal and verify the locker number and floor assigned to you.'},
-    {t:'Reset your access code',d:'In the Locker Portal, select your locker and click Reset Code. A new code will arrive by email within 15 minutes.'},
-    {t:'Use the temporary override',d:'Request the temporary override code from your team lead to confirm whether the issue is with the code or the lock itself.'},
-  ]},
+const kbData={
+  login:{title:'Login & Authentication',desc:'Follow these steps before opening a request. Most login issues can be resolved without Site Admin intervention.',steps:[{t:'Check your VPN connection',d:'Ensure GlobalProtect is connected. Disconnect and reconnect, or try switching VPN gateway in the app.'},{t:'Clear browser cache & cookies',d:'In your browser, clear cache and cookies for the last 7 days. Close all windows and reopen.'},{t:'Try incognito mode or a different browser',d:"Open an incognito window or switch between Edge and Chrome. Many SSO issues are caused by browser extensions."},{t:'Check your MFA / Authenticator app',d:"Ensure Microsoft Authenticator is up to date and your phone's time is correct."},{t:'Self-service password reset',d:'Visit aka.ms/sspr to reset your password using your registered phone or backup email.'}]},
+  yubikey:{title:'YubiKey Troubleshooting',desc:'Work through these steps. Most YubiKey problems are port or registration related.',steps:[{t:'Try a different USB port',d:'Remove the YubiKey and plug it directly into the laptop (not a hub). Try both USB-A and USB-C with an adapter.'},{t:'Check YubiKey Manager is installed',d:'Open YubiKey Manager from Start. If missing, install it via the Software Center.'},{t:'Re-register the YubiKey',d:'In your account security settings, remove and re-add the YubiKey following the YubiKey Registration Guide.'},{t:"Test on a colleague's machine",d:'Try the key on another device to determine whether the issue is with the key or your machine.'}]},
+  tools:{title:'Tools & Software Troubleshooting',desc:'App issues are frequently fixed by re-authentication, updates or cache clearing.',steps:[{t:'Sign out and back in',d:'Fully sign out of the affected application, close it completely from the taskbar, then sign in again.'},{t:'Check for pending updates',d:'Go to Help > Check for updates inside the app, or open the Software Center and apply all pending updates.'},{t:'Clear application cache',d:'For Teams: close the app, go to %appdata%\\Microsoft\\Teams, delete the Cache folder, then relaunch.'},{t:'Repair via Software Center',d:'Open Software Center, find the application, click Repair. Do not use external installers.'}]},
+  computer:{title:'Computer & Hardware Troubleshooting',desc:'Hardware and OS issues often resolve with the steps below.',steps:[{t:'Perform a full restart',d:'Click Start > Restart (not Shut Down). A full restart clears memory and applies pending updates.'},{t:'Run Windows Update',d:'Go to Settings > Windows Update, check for updates, apply all available, and restart.'},{t:'Run Disk Cleanup',d:'Search for "Disk Cleanup" in the Start menu, run on the C: drive, and clear temporary files.'},{t:'Check cable and dock connections',d:'Disconnect and reconnect all cables from your docking station. Test directly from the laptop port.'}]},
+  newhire:{title:'New-hire Onboarding Checklist',desc:'Confirm each item below before raising a request.',steps:[{t:'Verify wave registration',d:'Confirm the new hire was added to the wave spreadsheet at least 5 business days before their start date.'},{t:'Confirm account provisioning request',d:'Check that the AD account form was submitted to IT and that a confirmation email was received.'},{t:'Verify equipment assignment',d:'Confirm a laptop has been assigned and is ready for collection on day one.'},{t:'Check YubiKey pre-provisioning',d:'YubiKeys for new hires must be pre-registered 48 hours before the start date.'}]},
+  locker:{title:'Locker Management',desc:'Most locker issues are resolved through the portal before raising a request.',steps:[{t:'Check your assignment in the Locker Portal',d:'Log in to the Locker Portal and verify the locker number and floor assigned to you.'},{t:'Reset your access code',d:'In the Locker Portal, select your locker and click Reset Code. A new code will arrive by email within 15 minutes.'},{t:'Use the temporary override',d:'Request the temporary override code from your team lead to confirm whether the issue is with the code or the lock itself.'}]},
 };
 
-// ═══════════════════════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════════════════════
+// ═══════════ NAVIGATION ═════════════════════════════════════
+function navClick(id, btnEl){
+  nav(id, btnEl);
+}
 function nav(id, btnEl){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
   if(btnEl) btnEl.classList.add('active');
+  else {
+    // find matching nav item
+    const map={'home':0,'issues':1,'tickets':2,'kb':3,'new-ticket':4};
+    const items=document.querySelectorAll('.nav-item');
+    if(map[id]!==undefined) items[map[id]].classList.add('active');
+  }
   if(id==='home'||id==='tickets') renderTickets();
   if(id==='home') renderHomeBanner();
   if(id==='issues') renderIssues();
 }
 
-// ═══════════════════════════════════════════════════════════
-// HOME BANNER
-// ═══════════════════════════════════════════════════════════
+// ═══════════ HOME BANNER ════════════════════════════════════
 function renderHomeBanner(){
-  const banner = document.getElementById('home-issue-banner');
-  const text = document.getElementById('home-issue-banner-text');
-  const active = ongoingIssues.filter(i=>i.severity==='critical'||i.severity==='warning');
-  if(active.length===0){ banner.style.display='none'; return; }
+  const banner=document.getElementById('home-issue-banner');
+  const text=document.getElementById('home-issue-banner-text');
+  const active=ongoingIssues.filter(i=>i.severity==='critical'||i.severity==='warning');
+  if(active.length===0){banner.style.display='none';return;}
   banner.style.display='flex';
-  const crit = active.filter(i=>i.severity==='critical').length;
-  let msg = `<strong>${active.length} active issue${active.length>1?'s':''}</strong> affecting the project`;
-  if(crit>0) msg += ` — including ${crit} critical outage${crit>1?'s':''}`;
-  msg += '. <span style="cursor:pointer;text-decoration:underline" onclick="nav(\'issues\',document.querySelector(\'.nav-item:nth-child(2)\'))">View Ongoing Issues →</span>';
-  text.innerHTML = msg;
+  const crit=active.filter(i=>i.severity==='critical').length;
+  let msg=`<strong>${active.length} active issue${active.length>1?'s':''}</strong> affecting the project`;
+  if(crit>0) msg+=` — including ${crit} critical outage${crit>1?'s':''}`;
+  msg+=`. <a onclick="nav('issues',null)">View Ongoing Issues →</a>`;
+  text.innerHTML=msg;
 }
 
-// ═══════════════════════════════════════════════════════════
-// ONGOING ISSUES
-// ═══════════════════════════════════════════════════════════
+// ═══════════ ONGOING ISSUES ═════════════════════════════════
 function sevBadge(sev){
   if(sev==='critical') return '<span class="badge b-red">Critical</span>';
   if(sev==='warning')  return '<span class="badge b-orange">Warning</span>';
   return '<span class="badge b-blue">Info</span>';
 }
-
 function renderIssues(){
-  const list = document.getElementById('issues-list');
-  document.getElementById('issues-count-badge').textContent = ongoingIssues.length;
-  if(ongoingIssues.length===0){
-    list.innerHTML='<div style="padding:28px;text-align:center;color:var(--text-3);font-size:13.5px">✅ No active issues — all systems operational.</div>';
-    return;
-  }
-  list.innerHTML = ongoingIssues.map((iss,i)=>`
+  const list=document.getElementById('issues-list');
+  document.getElementById('issues-count-badge').textContent=ongoingIssues.length;
+  if(ongoingIssues.length===0){list.innerHTML='<div style="padding:24px;text-align:center;color:var(--text-3);font-size:13.5px">✅ No active issues — all systems operational.</div>';return;}
+  list.innerHTML=ongoingIssues.map((iss,i)=>`
     <div class="issue-alert">
       <div class="issue-alert-dot ${iss.severity}"></div>
       <div class="issue-alert-body">
         <div class="issue-alert-title">${iss.title}</div>
-        <div class="issue-alert-meta">${iss.category} &nbsp;·&nbsp; Started ${iss.started} &nbsp;·&nbsp; ${iss.impactedUsers.length} user${iss.impactedUsers.length!==1?'s':''} impacted &nbsp;·&nbsp; ETA: ${iss.eta}</div>
+        <div class="issue-alert-meta">${iss.category} · Started ${iss.started} · ${iss.impactedUsers.length} user${iss.impactedUsers.length!==1?'s':''} impacted · ETA: ${iss.eta}</div>
       </div>
       <div class="issue-alert-actions">
         ${sevBadge(iss.severity)}
@@ -898,79 +961,62 @@ function renderIssues(){
     </div>`).join('');
 }
 
-let currentIssueIdx = null;
-let issueLoc = 'office';
-
+let currentIssueIdx=null,issueLoc='office';
 function setIssueLoc(loc){
   issueLoc=loc;
-  document.getElementById('im-loc-office').className = loc==='office'?'sel':'';
-  document.getElementById('im-loc-remote').className = loc==='remote'?'sel':'';
+  document.getElementById('im-loc-office').className=loc==='office'?'sel':'';
+  document.getElementById('im-loc-remote').className=loc==='remote'?'sel':'';
 }
-
 function openIssueModal(i){
-  currentIssueIdx = i;
-  issueLoc = 'office';
+  currentIssueIdx=i; issueLoc='office';
   document.getElementById('im-loc-office').className='sel';
   document.getElementById('im-loc-remote').className='';
   document.getElementById('im-new-user').value='';
-  const iss = ongoingIssues[i];
-  document.getElementById('im-title').textContent = iss.title;
-  document.getElementById('im-sub').innerHTML = `${iss.id} &nbsp;·&nbsp; Started ${iss.started}`;
-  document.getElementById('im-banner').innerHTML = `⚠️ <strong>Active issue</strong> — the Site Admin team is currently investigating. ETA: <strong>${iss.eta}</strong>.`;
-  document.getElementById('im-grid').innerHTML = `
+  const iss=ongoingIssues[i];
+  document.getElementById('im-title').textContent=iss.title;
+  document.getElementById('im-sub').innerHTML=`${iss.id} &nbsp;·&nbsp; Started ${iss.started}`;
+  document.getElementById('im-banner').innerHTML=`⚠️ <strong>Active issue</strong> — the Site Admin team is currently investigating. ETA: <strong>${iss.eta}</strong>.`;
+  document.getElementById('im-grid').innerHTML=`
     <div class="detail-field"><label>Severity</label><p>${sevBadge(iss.severity)}</p></div>
     <div class="detail-field"><label>Category</label><p>${iss.category}</p></div>
-    <div class="detail-field"><label>Issue ID</label><p style="font-family:var(--mono);font-size:13px">${iss.id}</p></div>
+    <div class="detail-field"><label>Issue ID</label><p style="font-family:var(--mono);font-size:12px">${iss.id}</p></div>
     <div class="detail-field"><label>ETA</label><p>${iss.eta}</p></div>`;
-  document.getElementById('im-desc').textContent = iss.desc;
+  document.getElementById('im-desc').textContent=iss.desc;
   renderIssueUsers(i);
-  document.getElementById('im-timeline').innerHTML = iss.timeline.map(tl=>`
-    <div class="tl-item">
-      <div class="tl-dot ${tl.dot}"></div>
-      <div class="tl-time">${tl.time}</div>
-      <div class="tl-msg">${tl.msg}</div>
-      <div class="tl-by">${tl.by}</div>
-    </div>`).join('');
+  document.getElementById('im-timeline').innerHTML=iss.timeline.map(tl=>`
+    <div class="tl-item"><div class="tl-dot ${tl.dot}"></div><div class="tl-time">${tl.time}</div><div class="tl-msg">${tl.msg}</div><div class="tl-by">${tl.by}</div></div>`).join('');
   document.getElementById('issue-modal-overlay').classList.add('open');
 }
-
 function renderIssueUsers(i){
-  const iss = ongoingIssues[i];
-  document.getElementById('im-user-count').textContent = iss.impactedUsers.length;
-  const list = document.getElementById('im-users-list');
-  if(iss.impactedUsers.length===0){
-    list.innerHTML='<div style="font-size:12.5px;color:var(--text-3);padding:6px 0">No users added yet. Add yourself below if you are impacted.</div>';
-    return;
-  }
-  list.innerHTML = iss.impactedUsers.map(u=>`
+  const iss=ongoingIssues[i];
+  document.getElementById('im-user-count').textContent=iss.impactedUsers.length;
+  const list=document.getElementById('im-users-list');
+  if(iss.impactedUsers.length===0){list.innerHTML='<div style="font-size:12px;color:var(--text-3);padding:4px 0">No users added yet.</div>';return;}
+  list.innerHTML=iss.impactedUsers.map(u=>`
     <div class="affected-user-pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:13px;height:13px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       <span>${u.email}</span>
       <span class="user-entry-location ${u.location}">${u.location==='remote'?'Remote':'Office'}</span>
     </div>`).join('');
 }
-
 function addImpactedToIssue(){
-  const email = document.getElementById('im-new-user').value.trim();
-  if(!email){ toast('Please enter a user account','err'); return; }
-  if(!email.includes('@')){ toast('Please enter a valid email address','err'); return; }
-  const iss = ongoingIssues[currentIssueIdx];
-  if(iss.impactedUsers.some(u=>u.email===email)){ toast('This user is already listed','err'); return; }
-  iss.impactedUsers.push({email, location:issueLoc});
+  const email=document.getElementById('im-new-user').value.trim();
+  if(!email){toast('Please enter a user account','err');return;}
+  if(!email.includes('@')){toast('Please enter a valid email address','err');return;}
+  const iss=ongoingIssues[currentIssueIdx];
+  if(iss.impactedUsers.some(u=>u.email===email)){toast('This user is already listed','err');return;}
+  iss.impactedUsers.push({email,location:issueLoc});
   document.getElementById('im-new-user').value='';
   renderIssueUsers(currentIssueIdx);
   renderIssues();
   toast('User added to impacted list','ok');
 }
-
 function closeIssueModal(e){
-  if(e===null || e.target===document.getElementById('issue-modal-overlay'))
+  if(e===null||e.target===document.getElementById('issue-modal-overlay'))
     document.getElementById('issue-modal-overlay').classList.remove('open');
 }
 
-// ═══════════════════════════════════════════════════════════
-// TICKETS
-// ═══════════════════════════════════════════════════════════
+// ═══════════ TICKETS ════════════════════════════════════════
 function statusBadge(s){
   if(s==='open')     return '<span class="badge b-blue">Open</span>';
   if(s==='progress') return '<span class="badge b-amber">In progress</span>';
@@ -982,24 +1028,22 @@ function priorityBadge(p){
   if(p==='Medium') return '<span class="badge b-amber">Medium</span>';
   return '<span class="badge b-gray">Low</span>';
 }
-
 function renderTickets(){
   ['home-tickets','all-tickets'].forEach(id=>{
     const el=document.getElementById(id); if(!el) return;
-    const list = id==='home-tickets' ? tickets.slice(0,3) : tickets;
-    el.innerHTML = list.map((t,i)=>`
+    const list=id==='home-tickets'?tickets.slice(0,3):tickets;
+    el.innerHTML=list.map((t,i)=>`
       <div class="ticket-row" onclick="openModal(${i})">
         <span class="ticket-id-tag">${t.id}</span>
         <div class="ticket-info">
           <div class="ticket-title">${t.title}</div>
-          <div class="ticket-meta">${t.type} &nbsp;·&nbsp; ${t.submitted}</div>
+          <div class="ticket-meta">${t.type} · ${t.submitted}</div>
         </div>
         ${statusBadge(t.status)}
         <div class="ticket-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>`).join('');
   });
 }
-
 function openModal(i){
   const t=tickets[i];
   document.getElementById('m-title').textContent=t.title;
@@ -1009,41 +1053,29 @@ function openModal(i){
     <div class="detail-field"><label>Status</label><p>${statusBadge(t.status)}</p></div>
     <div class="detail-field"><label>Priority</label><p>${priorityBadge(t.priority)}</p></div>
     <div class="detail-field"><label>Category</label><p>${t.type}</p></div>
-    <div class="detail-field"><label>Ticket ID</label><p style="font-family:var(--mono);font-size:13px">${t.id}</p></div>`;
-
-  // Impacted users section
-  const usersSection = document.getElementById('m-users-section');
-  const usersList = document.getElementById('m-users-list');
-  if(t.impactedUsers && t.impactedUsers.length>0){
-    usersSection.style.display='block';
-    usersList.innerHTML = t.impactedUsers.map(u=>`
+    <div class="detail-field"><label>Ticket ID</label><p style="font-family:var(--mono);font-size:12px">${t.id}</p></div>`;
+  const sec=document.getElementById('m-users-section');
+  const ul=document.getElementById('m-users-list');
+  if(t.impactedUsers&&t.impactedUsers.length>0){
+    sec.style.display='block';
+    ul.innerHTML=t.impactedUsers.map(u=>`
       <div class="affected-user-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:13px;height:13px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
         <span>${u.email}</span>
         <span class="user-entry-location ${u.location}">${u.location==='remote'?'Remote':'Office'}</span>
       </div>`).join('');
-  } else {
-    usersSection.style.display='none';
-  }
-
+  } else { sec.style.display='none'; }
   document.getElementById('m-timeline').innerHTML=t.timeline.map(tl=>`
-    <div class="tl-item">
-      <div class="tl-dot ${tl.dot}"></div>
-      <div class="tl-time">${tl.time}</div>
-      <div class="tl-msg">${tl.msg}</div>
-      <div class="tl-by">${tl.by}</div>
-    </div>`).join('');
+    <div class="tl-item"><div class="tl-dot ${tl.dot}"></div><div class="tl-time">${tl.time}</div><div class="tl-msg">${tl.msg}</div><div class="tl-by">${tl.by}</div></div>`).join('');
   document.getElementById('modal-overlay').classList.add('open');
 }
 function closeModal(e){
-  if(e===null || e.target===document.getElementById('modal-overlay'))
+  if(e===null||e.target===document.getElementById('modal-overlay'))
     document.getElementById('modal-overlay').classList.remove('open');
 }
 
-// ═══════════════════════════════════════════════════════════
-// KNOWLEDGE BASE
-// ═══════════════════════════════════════════════════════════
-let kbStepsDone=0, kbTotalSteps=0;
+// ═══════════ KNOWLEDGE BASE ══════════════════════════════════
+let kbStepsDone=0,kbTotalSteps=0;
 function openKB(type){
   const d=kbData[type];
   document.getElementById('kb-home-view').style.display='none';
@@ -1058,7 +1090,7 @@ function openKB(type){
         <div class="a-step-title">${s.t}</div>
         <div class="a-step-desc">${s.d}</div>
         <button class="a-step-btn" onclick="markKBStep(${i})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:13px;height:13px;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:12px;height:12px;stroke-width:2.2"><polyline points="20 6 9 17 4 12"/></svg>
           Mark as done
         </button>
       </div>
@@ -1083,19 +1115,15 @@ function markKBStep(i){
 }
 function handleKBAck(cb){
   const box=document.getElementById('kb-ack-box');
-  const btnArea=document.getElementById('kb-open-ticket-btn');
-  if(cb.checked){ box.className='ack-box ok'; btnArea.style.display='block'; }
-  else{ box.className='ack-box'; btnArea.style.display='none'; }
+  const btn=document.getElementById('kb-open-ticket-btn');
+  if(cb.checked){box.className='ack-box ok';btn.style.display='block';}
+  else{box.className='ack-box';btn.style.display='none';}
 }
-function goToNewTicketFromKB(){
-  nav('new-ticket', document.querySelector('.nav-item:nth-child(6)'));
-}
+function goToNewTicketFromKB(){ nav('new-ticket',null); }
 
-// ═══════════════════════════════════════════════════════════
-// NEW REQUEST FLOW
-// ═══════════════════════════════════════════════════════════
-let selectedType=null, tsStepsDone=0, tsTotalSteps=0, ticketNum=144;
-let impactedUsers=[], newUserLoc='office';
+// ═══════════ NEW REQUEST FLOW ═════════════════════════════════
+let selectedType=null,tsStepsDone=0,tsTotalSteps=0,ticketNum=144;
+let impactedUsers=[],newUserLoc='office';
 
 function selectType(el,type){
   document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('sel'));
@@ -1119,7 +1147,7 @@ function toStep2(){
         <div class="a-step-title">${s.t}</div>
         <div class="a-step-desc">${s.d}</div>
         <button class="a-step-btn" onclick="markTsStep(${i})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:13px;height:13px;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:12px;height:12px;stroke-width:2.2"><polyline points="20 6 9 17 4 12"/></svg>
           Mark as attempted
         </button>
       </div>
@@ -1143,83 +1171,62 @@ function markTsStep(i){
 }
 function handleTsAck(cb){
   const box=document.getElementById('ts-ack-box');
-  if(cb.checked){ box.className='ack-box ok'; document.getElementById('btn-to-step3').disabled=false; }
-  else{ box.className='ack-box'; document.getElementById('btn-to-step3').disabled=true; }
+  if(cb.checked){box.className='ack-box ok';document.getElementById('btn-to-step3').disabled=false;}
+  else{box.className='ack-box';document.getElementById('btn-to-step3').disabled=true;}
 }
 function toStep3(){
   document.getElementById('nt-step2').style.display='none';
   document.getElementById('nt-step3').style.display='';
   const names={login:'Login / Account',yubikey:'YubiKey',tools:'Tools / Software',computer:'Computer',newhire:'New-hire Wave',locker:'Lockers'};
   document.getElementById('form-type-badge').textContent=names[selectedType]||'General';
-  impactedUsers=[];
-  newUserLoc='office';
+  impactedUsers=[]; newUserLoc='office';
   document.getElementById('loc-office').className='sel';
   document.getElementById('loc-remote').className='';
   renderImpactedUsers();
 }
-
 function setNewUserLoc(loc){
   newUserLoc=loc;
   document.getElementById('loc-office').className=loc==='office'?'sel':'';
   document.getElementById('loc-remote').className=loc==='remote'?'sel':'';
 }
-
 function addImpactedUser(){
   const email=document.getElementById('new-user-email').value.trim();
-  if(!email){ toast('Please enter a user account','err'); return; }
-  if(!email.includes('@')){ toast('Please enter a valid email address','err'); return; }
-  if(impactedUsers.some(u=>u.email===email)){ toast('This user is already in the list','err'); return; }
-  impactedUsers.push({email, location:newUserLoc});
+  if(!email){toast('Please enter a user account','err');return;}
+  if(!email.includes('@')){toast('Please enter a valid email address','err');return;}
+  if(impactedUsers.some(u=>u.email===email)){toast('This user is already in the list','err');return;}
+  impactedUsers.push({email,location:newUserLoc});
   document.getElementById('new-user-email').value='';
   renderImpactedUsers();
   toast('User added','ok');
 }
-
 function removeImpactedUser(idx){
-  impactedUsers.splice(idx,1);
-  renderImpactedUsers();
+  impactedUsers.splice(idx,1); renderImpactedUsers();
 }
-
 function renderImpactedUsers(){
   const list=document.getElementById('impacted-users-list');
-  if(impactedUsers.length===0){
-    list.innerHTML='<div style="padding:14px 16px;font-size:13px;color:var(--text-3);text-align:center">No additional users added yet.</div>';
-    return;
-  }
+  if(impactedUsers.length===0){list.innerHTML='<div style="padding:13px 16px;font-size:12.5px;color:var(--text-3);text-align:center">No additional users added yet.</div>';return;}
   list.innerHTML=impactedUsers.map((u,i)=>`
     <div class="user-entry">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="1.8" style="width:13px;height:13px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       <span class="user-entry-email">${u.email}</span>
       <span class="user-entry-location ${u.location}">${u.location==='remote'?'Remote':'Office'}</span>
       <button class="user-entry-remove" onclick="removeImpactedUser(${i})" title="Remove">✕</button>
     </div>`).join('');
 }
-
 function submitTicket(){
   const desc=document.getElementById('f-desc').value.trim();
   const user=document.getElementById('f-user').value.trim();
   const loc=document.getElementById('f-user-location').value;
-  if(!desc||!user){ toast('Please fill in all required fields','err'); return; }
-  if(!loc){ toast('Please select the primary user\'s location','err'); return; }
+  if(!desc||!user){toast('Please fill in all required fields','err');return;}
+  if(!loc){toast("Please select the primary user's location",'err');return;}
   const allUsers=[{email:user,location:loc},...impactedUsers];
   document.getElementById('done-ticket-num').textContent='#SA-0'+ticketNum;
-  tickets.unshift({
-    id:'#SA-0'+ticketNum,
-    title:desc.substring(0,55)+(desc.length>55?'…':''),
-    type:document.getElementById('form-type-badge').textContent,
-    priority:document.getElementById('f-priority').options[document.getElementById('f-priority').selectedIndex].text.split('—')[0].trim(),
-    status:'open',submitted:'Just now',desc,impactedUsers:allUsers,
-    timeline:[
-      {dot:'active',time:'Now',msg:'Request submitted via portal.',by:'You'},
-      {dot:'',time:'Now',msg:'Awaiting assignment.',by:'System'}
-    ]
-  });
+  tickets.unshift({id:'#SA-0'+ticketNum,title:desc.substring(0,55)+(desc.length>55?'…':''),type:document.getElementById('form-type-badge').textContent,priority:document.getElementById('f-priority').options[document.getElementById('f-priority').selectedIndex].text.split('—')[0].trim(),status:'open',submitted:'Just now',desc,impactedUsers:allUsers,timeline:[{dot:'active',time:'Now',msg:'Request submitted via portal.',by:'You'},{dot:'',time:'Now',msg:'Awaiting assignment.',by:'System'}]});
   ticketNum++;
   document.getElementById('nt-step3').style.display='none';
   document.getElementById('nt-step4').style.display='';
   toast('Request submitted!','ok');
 }
-
 function resetFlow(){
   selectedType=null; tsStepsDone=0; impactedUsers=[];
   document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('sel'));
@@ -1230,14 +1237,12 @@ function resetFlow(){
   document.getElementById('f-user-location').value='';
   document.getElementById('f-sample').value=''; document.getElementById('f-link').value='';
 }
-
 function toast(msg,type){
   const el=document.getElementById('toast-el');
   el.textContent=msg; el.className='toast '+(type||'')+' show';
   setTimeout(()=>el.classList.remove('show'),2800);
 }
 
-// ── Init ──
 renderTickets();
 renderHomeBanner();
 </script>
